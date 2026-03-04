@@ -24,9 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
+      {/* <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      > */}
+      <body className="scrollbar-hide md:scrollbar-default bg-black text-white">
         {children}
       </body>
     </html>
