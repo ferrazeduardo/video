@@ -1,11 +1,12 @@
 using System;
+using Catalogo.Domain.SeedWork;
 using Catalogo.Domain.Validation;
 
 namespace Catalogo.Domain.Entity;
 
-public class Categoria
+public class Categoria : AggregationRoot
 {
-    public Categoria(string nome, string descricao)
+    public Categoria(string nome, string descricao) : base()
     {
         Nome = nome;
         Descricao = descricao;
@@ -13,7 +14,6 @@ public class Categoria
         dataCriacao = DateTime.Now;
         Validacao();
     }
-    public int id { get; set; }
     public string Nome { get; private set; }
     public string Descricao { get; private set; }
     public string Status { get; private set; }
@@ -40,8 +40,9 @@ public class Categoria
         .DispararExcecaoSeExistirErro();
     }
 
-    public void Update(string nome,string descricao)
+    public void Update(string nome,string descricao,Guid id)
     {
+        idGuid = id;
         Nome = nome;
         Descricao = descricao;
     }
