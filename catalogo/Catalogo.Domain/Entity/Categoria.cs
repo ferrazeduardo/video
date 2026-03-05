@@ -39,4 +39,10 @@ public class Categoria
         .Quando(Descricao.Length > 10_000,"Descricao não pode ter mais de 10.000 caracteres")
         .DispararExcecaoSeExistirErro();
     }
+
+    public void Update(string nome,string descricao)
+    {
+        Nome = nome;
+        Descricao = descricao;
+    }
 }
