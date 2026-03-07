@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="UseCases/Categoria/Delete/" />
+    <Folder Include="UseCases/Categoria/Update/" />
   </ItemGroup>
 
 </Project>
