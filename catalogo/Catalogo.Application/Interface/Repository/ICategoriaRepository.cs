@@ -3,6 +3,6 @@ using Catalogo.Domain.Entity;
 
 namespace Catalogo.Application.Interface.Repository;
 
-public interface ICatalogoRepository : IRepository<Categoria>
+public interface ICategoriaRepository : IRepository<Categoria>
 {
 }

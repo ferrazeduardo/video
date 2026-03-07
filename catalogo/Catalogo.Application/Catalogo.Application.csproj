@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interface/" />
-    <Folder Include="Interface/Repository/" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="../Catalogo.Domain/Catalogo.Domain.csproj" />
   </ItemGroup>
 
