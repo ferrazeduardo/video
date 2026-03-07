@@ -1,10 +1,11 @@
 using System;
 using Catalogo.Application.Interface;
 using Catalogo.Application.Interface.Repository;
+using MediatR;
 using domain = Catalogo.Domain.Entity;
 namespace Catalogo.Application.UseCases.Categoria.Create;
 
-public class CreateCategoria
+public class CreateCategoria : IRequestHandler<CreateCategoriaInput,CreateCategoriaOutput>
 {
     private IUnitOfWork _unitOfWork;
     private ICategoriaRepository _categoriaRepository;
@@ -15,9 +16,9 @@ public class CreateCategoria
         _categoriaRepository = categoriaRepository;
     }
 
-    public async Task<CreateCategoriaOutput> Handler(CreateCategoriaInput createCategoriaInput, CancellationToken cancellationToken)
+    public async Task<CreateCategoriaOutput> Handle(CreateCategoriaInput request, CancellationToken cancellationToken)
     {
-        var categoria = new domain.Categoria(createCategoriaInput.nome, createCategoriaInput.descricao);
+         var categoria = new domain.Categoria(request.nome, request.descricao);
 
         await _categoriaRepository.Insert(categoria, cancellationToken);
 
