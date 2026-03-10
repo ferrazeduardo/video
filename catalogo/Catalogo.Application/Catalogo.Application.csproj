@@ -15,7 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Common/" />
+    <Folder Include="UseCases/Categoria/Common/" />
     <Folder Include="UseCases/Categoria/Delete/" />
+    <Folder Include="UseCases/Categoria/List/" />
     <Folder Include="UseCases/Categoria/Update/" />
   </ItemGroup>
 

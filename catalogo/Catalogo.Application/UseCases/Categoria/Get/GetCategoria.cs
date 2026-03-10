@@ -1,11 +1,12 @@
 using System;
 using Catalogo.Application.Interface.Repository;
+using Catalogo.Application.UseCases.Categoria.Common;
 using Catalogo.Domain.Exceptions;
 using MediatR;
 
 namespace Catalogo.Application.UseCases.Categoria.Get;
 
-public class GetCategoria : IRequestHandler<GetCategoriaInput, GetCategoriaOutput>
+public class GetCategoria : IRequestHandler<GetCategoriaInput, GetCategoriaOutput<CategoriaModelOutput>>
 {
     private ICategoriaRepository _categoriaRepository;
 
@@ -13,14 +14,14 @@ public class GetCategoria : IRequestHandler<GetCategoriaInput, GetCategoriaOutpu
     {
         _categoriaRepository = categoriaRepository;
     }
-    public async Task<GetCategoriaOutput> Handle(GetCategoriaInput request, CancellationToken cancellationToken)
+    public async Task<GetCategoriaOutput<CategoriaModelOutput>> Handle(GetCategoriaInput request, CancellationToken cancellationToken)
     {
         var categoria = await _categoriaRepository.Get(request.id);
 
         NotFoundException.Object(categoria, "Categoria não encontrada");
 
-        GetCategoriaOutput getCategoriaOutput = new();
-        getCategoriaOutput.FromCategoria(categoria);
+        GetCategoriaOutput<CategoriaModelOutput> getCategoriaOutput = new();
+        getCategoriaOutput.Categoria.FromCategoria(categoria);
 
         return getCategoriaOutput;
     }
