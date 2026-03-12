@@ -20,9 +20,9 @@ public class CategoriaRepository : ICategoriaRepository
         throw new NotImplementedException();
     }
 
-    public Task<Categoria> Get(Guid id)
+    public async Task<Categoria> Get(Guid id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _categorias.FirstOrDefaultAsync(x => x.idGuid == id, cancellationToken);
     }
 
     public async Task Insert(Categoria objeto, CancellationToken cancellationToken)
