@@ -16,6 +16,10 @@ public class Categoria : AggregationRoot
         Validacao();
     }
 
+    public Categoria()
+    {
+
+    }
 
     public string Nome { get; private set; }
     public string Descricao { get; private set; }

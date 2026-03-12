@@ -11,5 +11,10 @@ public abstract class Entity
 
     public int id { get; protected set; }
     public Guid idGuid { get; protected set; }
+
+    public void SetIdGuid(Guid idGuid)
+    {
+        this.idGuid = idGuid;
+    }   
     
 }

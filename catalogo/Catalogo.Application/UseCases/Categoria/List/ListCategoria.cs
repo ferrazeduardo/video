@@ -22,7 +22,7 @@ public class ListCategoria : IRequestHandler<ListCategoriaInput, ListCategoriaOu
 
         var output = new ListCategoriaOutput(
             searchOutpu.paginaAtual,
-            searchOutpu.PerPagina,
+            searchOutpu.Quantidade,
             searchOutpu.Total,
             searchOutpu.Itens.Select<domain.Categoria,CategoriaModelOutput>(i => new CategoriaModelOutput().FromCategoriaObject(i)).ToList()
         );

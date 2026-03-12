@@ -30,9 +30,16 @@ public class CategoriaRepository : ICategoriaRepository
         await _categorias.AddAsync(objeto, cancellationToken);
     }
 
-    public Task<SearchOutput<Categoria>> Search(SearchInput searchInput, CancellationToken cancellationToken)
+    public async Task<SearchOutput<Categoria>> Search(SearchInput searchInput, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var query = _categorias.AsNoTracking();
+        query = searchInput.Order == SearchOrder.Desc ? query.OrderByDescending(x => x.Nome) : query.OrderBy(x => x.Nome);
+        if (!String.IsNullOrEmpty(searchInput.Pesquisa))
+            query = query.Where(x => x.Nome.Contains(searchInput.Pesquisa));
+
+        var total = await query.CountAsync(cancellationToken);
+        var itens = await query.Skip((searchInput.Pagina - 1) * searchInput.Quantidade).Take(searchInput.Quantidade).ToListAsync();
+        return new(searchInput.Pagina, searchInput.Quantidade, total, itens);
     }
 
     public Task Update(Categoria categoria, CancellationToken cancellationToken)

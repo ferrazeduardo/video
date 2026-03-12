@@ -2,6 +2,7 @@ using System;
 using Catalogo.Application.Interface;
 using Catalogo.Application.Interface.Repository;
 using MediatR;
+using domain = Catalogo.Domain.Entity;
 
 namespace Catalogo.Application.UseCases.Categoria.Delete;
 
@@ -18,7 +19,9 @@ public class DeleteCategoria : IRequestHandler<DeleteCategoriaInput, DeleteCateg
 
     public async Task<DeleteCategoriaOutput> Handle(DeleteCategoriaInput request, CancellationToken cancellationToken)
     {
-        await _categoriaRepository.Delete(request.id, cancellationToken);
+        var categoria = new domain.Categoria();
+        categoria.SetIdGuid(request.id);
+        await _categoriaRepository.Delete(categoria, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
 
         return new DeleteCategoriaOutput();

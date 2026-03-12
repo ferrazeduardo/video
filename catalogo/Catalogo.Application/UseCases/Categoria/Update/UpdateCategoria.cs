@@ -19,13 +19,13 @@ public class UpdateCategoria : IRequestHandler<UpdateCategoriaInput, UpdateCateg
 
     public async Task<UpdateCategoriaOutput> Handle(UpdateCategoriaInput request, CancellationToken cancellationToken)
     {
-        var categoria = await _categoriaRepository.Get(request.id);
+        var categoria = await _categoriaRepository.Get(request.id, cancellationToken);
 
         NotFoundException.Object(categoria, "Categoria não encontrada");
 
-        categoria.Update(request.nome,request.descricao,request.status);
+        categoria.Update(request.nome, request.descricao, request.status);
 
-        await _categoriaRepository.Update(categoria,cancellationToken);
+        await _categoriaRepository.Update(categoria, cancellationToken);
 
         return new UpdateCategoriaOutput();
     }
