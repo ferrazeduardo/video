@@ -15,9 +15,9 @@ public class CategoriaRepository : ICategoriaRepository
         _context = context;
     }
 
-    public Task Delete(Guid id, CancellationToken cancellationToken)
+    public Task Delete(Categoria categoria, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(_categorias.Remove(categoria));
     }
 
     public async Task<Categoria> Get(Guid id, CancellationToken cancellationToken)

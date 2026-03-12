@@ -15,6 +15,8 @@ public class Categoria : AggregationRoot
         dataCriacao = DateTime.Now;
         Validacao();
     }
+
+
     public string Nome { get; private set; }
     public string Descricao { get; private set; }
     public string Status { get; private set; }
