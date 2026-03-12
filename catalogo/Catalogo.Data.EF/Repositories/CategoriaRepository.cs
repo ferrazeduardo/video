@@ -22,7 +22,7 @@ public class CategoriaRepository : ICategoriaRepository
 
     public async Task<Categoria> Get(Guid id, CancellationToken cancellationToken)
     {
-        return await _categorias.FirstOrDefaultAsync(x => x.idGuid == id, cancellationToken);
+        return await _categorias.AsNoTracking().FirstOrDefaultAsync(x => x.idGuid == id, cancellationToken);
     }
 
     public async Task Insert(Categoria objeto, CancellationToken cancellationToken)
