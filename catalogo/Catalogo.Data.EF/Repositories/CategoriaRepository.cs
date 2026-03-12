@@ -37,6 +37,6 @@ public class CategoriaRepository : ICategoriaRepository
 
     public Task Update(Categoria categoria, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(_categorias.Update(categoria));
     }
 }
