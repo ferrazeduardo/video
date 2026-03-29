@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="Configurations/" />
+    <Folder Include="DependencyInjection/" />
     <Folder Include="Repositories/" />
   </ItemGroup>
 

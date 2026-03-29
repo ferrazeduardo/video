@@ -12,6 +12,8 @@ public static class ApiConfiguration
             app.MapOpenApi();
         }
 
+        app.MapControllers();
+
         return app;
     }
 }
