@@ -13,7 +13,7 @@ public static class DependencyInjection
     {
         services.AddScoped<ICategoriaRepository, CategoriaRepository>();
         services.AddDbContext<CatalogoDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(configuration.GetConnectionString("CatalogoDb")));
         return services;
     }
 }

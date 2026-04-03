@@ -10,15 +10,22 @@ public class CatalogoDbContextFactory : IDesignTimeDbContextFactory<CatalogoDbCo
 {
     public CatalogoDbContext CreateDbContext(string[] args)
     {
-         var configuration = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../Usuario.Api"))
-                .AddJsonFile("appsettings.json")
-                .Build();
+        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-            var optionsBuilder = new DbContextOptionsBuilder<CatalogoDbContext>();
-            optionsBuilder.UseNpgsql(
-                configuration.GetConnectionString("DefaultConnection"));
+        var basePath = Path.Combine(Directory.GetCurrentDirectory(), "../Catalogo.Api");
 
-            return new CatalogoDbContext(optionsBuilder.Options);
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(basePath)
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
+            .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: false)
+            .AddEnvironmentVariables()
+            .Build();
+
+        var optionsBuilder = new DbContextOptionsBuilder<CatalogoDbContext>();
+
+        optionsBuilder.UseNpgsql(
+            configuration.GetConnectionString("CatalogoDb"));
+
+        return new CatalogoDbContext(optionsBuilder.Options);
     }
 }
