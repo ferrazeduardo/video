@@ -15,6 +15,16 @@ public abstract class Entity
     public void SetIdGuid(Guid idGuid)
     {
         this.idGuid = idGuid;
-    }   
-    
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+
+
+        var entity = (Entity)obj;
+        return idGuid == entity.idGuid;
+    }
+
 }
