@@ -20,4 +20,14 @@ public class Genero : AggregationRoot
     {
         Status = "S";
     }
+
+    public void Inativo()
+    {
+        Status = "N";
+    }
+
+    public void Update(string nome)
+    {
+        Nome = nome;
+    }
 }
