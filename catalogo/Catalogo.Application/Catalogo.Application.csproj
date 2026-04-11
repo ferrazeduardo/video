@@ -21,6 +21,9 @@
     <Folder Include="UseCases/Categoria/Delete/" />
     <Folder Include="UseCases/Categoria/List/" />
     <Folder Include="UseCases/Categoria/Update/" />
+    <Folder Include="UseCases/Genero/" />
+    <Folder Include="UseCases/Genero/Common/" />
+    <Folder Include="UseCases/Genero/Create/" />
   </ItemGroup>
 
 </Project>
