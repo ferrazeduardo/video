@@ -3,7 +3,6 @@ using MediatR;
 
 namespace Catalogo.Application.UseCases.Genero.Create;
 
-public class CreateGeneroInput : IRequest<CreateGeneroOutput>
+public record CreateGeneroInput(string nome) : IRequest<CreateGeneroOutput>
 {
-    public string nome { get; set; }
 }

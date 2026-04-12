@@ -52,4 +52,12 @@ public class Genero : AggregationRoot
     {
         Categorias.Remove(categoria);
     }
+
+    public void AddCategoria(Guid id, string nome)
+    {
+        var categoria = Categorias.FirstOrDefault(x => x.idGuid == id);
+        ExcecaoDeDominio.HaError(categoria is not null, "Categoria já existe nesse gênero");
+        var categoriaNova = new Categoria(id, nome);
+        Categorias.Add(categoriaNova);
+    }
 }
