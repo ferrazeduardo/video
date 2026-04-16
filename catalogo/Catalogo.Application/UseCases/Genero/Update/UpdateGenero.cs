@@ -25,7 +25,7 @@ public class UpdateGenero : IRequestHandler<UpdateGeneroInput, UpdateGeneroOutpu
 
         genero.Update(request.nome, request.status);
 
-        _unitOfWork.Commit(cancellationToken);
+        await _unitOfWork.Commit(cancellationToken);
 
         return new UpdateGeneroOutput();
     }

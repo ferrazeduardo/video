@@ -74,7 +74,7 @@ public class Genero : AggregationRoot
     public void Update(string nome, string status)
     {
         Nome = nome;
-        Status = status;
+        Status = string.IsNullOrEmpty(status) ? Status : status;
         ValidacaoUpdate();
     }
 }
