@@ -25,6 +25,7 @@
     <Folder Include="UseCases/Genero/AddCategoria/" />
     <Folder Include="UseCases/Genero/Common/" />
     <Folder Include="UseCases/Genero/Create/" />
+    <Folder Include="UseCases/Genero/Update/" />
   </ItemGroup>
 
 </Project>

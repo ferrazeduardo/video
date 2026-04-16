@@ -1,6 +1,7 @@
 using System;
 using Catalogo.Domain.Exceptions;
 using Catalogo.Domain.SeedWork;
+using Catalogo.Domain.Validation;
 
 namespace Catalogo.Domain.Entity;
 
@@ -43,6 +44,15 @@ public class Genero : AggregationRoot
         ExcecaoDeDominio.HaError(string.IsNullOrEmpty(Nome), "O nome do gênero é obrigatório.");
     }
 
+    public void ValidacaoUpdate()
+    {
+        string[] statusValidos = new string[] { "S", "N" };
+        ValidadorDeRegra.Novo()
+        .Quando(string.IsNullOrEmpty(Nome), "O nome do gênero é obrigatório.")
+        .Quando(statusValidos.Contains(Status) is false, "Status deve ser 'S' ou 'N'")
+        .DispararExcecaoSeExistirErro();
+    }
+
     public void AddCategoria(Categoria categoria)
     {
         Categorias.Add(categoria);
@@ -59,5 +69,12 @@ public class Genero : AggregationRoot
         ExcecaoDeDominio.HaError(categoria is not null, "Categoria já existe nesse gênero");
         var categoriaNova = new Categoria(id, nome);
         Categorias.Add(categoriaNova);
+    }
+
+    public void Update(string nome, string status)
+    {
+        Nome = nome;
+        Status = status;
+        ValidacaoUpdate();
     }
 }
