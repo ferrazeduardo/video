@@ -15,6 +15,11 @@ public class Genero : AggregationRoot
         Ativo();
     }
 
+    public Genero()
+    {
+        
+    }
+
     public string Nome { get; private set; }
     public string Status { get; private set; }
     public DateTime dataCriacao { get; private set; }
