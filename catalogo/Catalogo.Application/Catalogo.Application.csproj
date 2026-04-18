@@ -27,6 +27,7 @@
     <Folder Include="UseCases/Genero/Create/" />
     <Folder Include="UseCases/Genero/Delete/" />
     <Folder Include="UseCases/Genero/Get/" />
+    <Folder Include="UseCases/Genero/List/" />
     <Folder Include="UseCases/Genero/Update/" />
   </ItemGroup>
 
