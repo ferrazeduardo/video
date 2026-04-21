@@ -1,5 +1,5 @@
 using System;
-using Catalogo.Application.Interface.Repository;
+using Catalogo.Domain.Interface.Repository;
 using Catalogo.Application.Interface.SearchRepository;
 using Catalogo.Application.UseCases.Categoria.Common;
 using MediatR;

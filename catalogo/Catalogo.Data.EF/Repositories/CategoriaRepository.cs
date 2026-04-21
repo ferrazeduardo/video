@@ -1,7 +1,8 @@
 using System;
-using Catalogo.Application.Interface.Repository;
+using System.Linq.Expressions;
 using Catalogo.Application.Interface.SearchRepository;
 using Catalogo.Domain.Entity;
+using Catalogo.Domain.Interface.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalogo.Data.EF.Repositories;
@@ -18,11 +19,6 @@ public class CategoriaRepository : ICategoriaRepository
     public Task Delete(Categoria categoria, CancellationToken cancellationToken)
     {
         return Task.FromResult(_categorias.Remove(categoria));
-    }
-
-    public async Task<Categoria> Get(Guid id, CancellationToken cancellationToken)
-    {
-        return await _categorias.AsNoTracking().FirstOrDefaultAsync(x => x.idGuid == id, cancellationToken);
     }
 
     public async Task Insert(Categoria objeto, CancellationToken cancellationToken)
@@ -45,5 +41,15 @@ public class CategoriaRepository : ICategoriaRepository
     public Task Update(Categoria categoria, CancellationToken cancellationToken)
     {
         return Task.FromResult(_categorias.Update(categoria));
+    }
+
+    public async Task<Categoria> Get(Expression<Func<Categoria, bool>> filtro, CancellationToken cancellationToken, bool rastrer = true)
+    {
+        var query = _categorias.AsQueryable();
+
+        if (!rastrer)
+            query = query.AsNoTracking();
+
+        return await query.FirstOrDefaultAsync(filtro, cancellationToken);
     }
 }

@@ -1,6 +1,6 @@
 using System;
 using Catalogo.Application.Interface;
-using Catalogo.Application.Interface.Repository;
+using Catalogo.Domain.Interface.Repository;
 using Catalogo.Domain.Exceptions;
 using MediatR;
 
@@ -19,7 +19,7 @@ public class UpdateCategoria : IRequestHandler<UpdateCategoriaInput, UpdateCateg
 
     public async Task<UpdateCategoriaOutput> Handle(UpdateCategoriaInput request, CancellationToken cancellationToken)
     {
-        var categoria = await _categoriaRepository.Get(request.id, cancellationToken);
+        var categoria = await _categoriaRepository.Get(x => x.idGuid == request.id, cancellationToken);
 
         NotFoundException.Object(categoria, "Categoria não encontrada");
 
