@@ -1,5 +1,5 @@
 using System;
-using Catalogo.Application.Interface.Repository;
+using Catalogo.Domain.Interface.Repository;
 using Catalogo.Domain.Exceptions;
 using MediatR;
 

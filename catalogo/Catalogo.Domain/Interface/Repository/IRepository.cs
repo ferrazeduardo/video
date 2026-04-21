@@ -2,7 +2,7 @@ using System;
 using System.Linq.Expressions;
 using Catalogo.Domain.Entity;
 
-namespace Catalogo.Application.Interface.Repository;
+namespace Catalogo.Domain.Interface.Repository;
 
 public interface IRepository<T>
 {

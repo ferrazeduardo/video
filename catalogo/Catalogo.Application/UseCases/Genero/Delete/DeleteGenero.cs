@@ -1,6 +1,6 @@
 using System;
 using Catalogo.Application.Interface;
-using Catalogo.Application.Interface.Repository;
+using Catalogo.Domain.Interface.Repository;
 using MediatR;
 
 namespace Catalogo.Application.UseCases.Genero.Delete;
