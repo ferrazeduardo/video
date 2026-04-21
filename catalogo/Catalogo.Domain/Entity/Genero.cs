@@ -24,7 +24,7 @@ public class Genero : AggregationRoot
     public string Status { get; private set; }
     public DateTime dataCriacao { get; private set; }
 
-    public ICollection<Categoria> Categorias { get; private set; } = [];
+    public ICollection<int> CategoriasIds { get; private set; } = [];
 
     public void Ativo()
     {
@@ -58,22 +58,16 @@ public class Genero : AggregationRoot
         .DispararExcecaoSeExistirErro();
     }
 
-    public void AddCategoria(Categoria categoria)
+    public void RemoveCategoria(int codigoCategoria)
     {
-        Categorias.Add(categoria);
+        CategoriasIds.Remove(codigoCategoria);
     }
 
-    public void RemoveCategoria(Categoria categoria)
+    public void AddCategoria(Categoria categoria, string nome)
     {
-        Categorias.Remove(categoria);
-    }
-
-    public void AddCategoria(Guid id, string nome)
-    {
-        var categoria = Categorias.FirstOrDefault(x => x.idGuid == id);
-        ExcecaoDeDominio.HaError(categoria is not null, "Categoria já existe nesse gênero");
-        var categoriaNova = new Categoria(id, nome);
-        Categorias.Add(categoriaNova);
+        int? categoriaJaExistente = CategoriasIds.FirstOrDefault(id => id == categoria.id);
+        ExcecaoDeDominio.HaError(categoriaJaExistente is not null, "Categoria já existe nesse gênero");
+        CategoriasIds.Add(categoria.id);
     }
 
     public void Update(string nome, string status)
