@@ -65,4 +65,9 @@ public class Genero : AggregationRoot
         Status = string.IsNullOrEmpty(status) ? Status : status;
         ValidacaoUpdate();
     }
+
+    public void AddCategoria(List<int> categoriaIds)
+    {
+        this.categoriasId = categoriaIds;
+    }
 }
