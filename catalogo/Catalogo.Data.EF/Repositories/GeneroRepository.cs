@@ -16,9 +16,11 @@ public class GeneroRepository : IGeneroRepository
         _context = context;
     }
 
-    public Task Delete(Genero objeto, CancellationToken cancellationToken)
+    public async Task Delete(Genero objeto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var categoriesIds = await _context.Set<GenerosCategorias>().Where(x => x.ID_GENERO == objeto.id).ToListAsync();
+        _context.Set<GenerosCategorias>().RemoveRange(categoriesIds);
+        _context.Set<Genero>().Remove(objeto);
     }
 
     public async Task<Genero> Get(Expression<Func<Genero, bool>> filtro, CancellationToken cancellationToken, bool rastrer = true)
