@@ -51,6 +51,7 @@ public class GeneroRepository : IGeneroRepository
 
     public Task Update(Genero objeto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        _context.Set<Genero>().Update(objeto);
+        return Task.CompletedTask;
     }
 }
