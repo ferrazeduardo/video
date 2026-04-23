@@ -44,14 +44,23 @@ public class GeneroRepository : IGeneroRepository
         await _context.Set<Genero>().AddAsync(objeto, cancellationToken);
     }
 
-    public Task<SearchOutput<Genero>> Search(SearchInput searchInput, CancellationToken cancellationToken)
+    public async Task<SearchOutput<Genero>> Search(SearchInput searchInput, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var query = _context.Set<Genero>().AsNoTracking();
+        query = searchInput.Order == SearchOrder.Desc ? query.OrderByDescending(x => x.Nome) : query.OrderBy(x => x.Nome);
+
+        if (!string.IsNullOrEmpty(searchInput.Pesquisa))
+            query = query.Where(x => x.Nome.Contains(searchInput.Pesquisa));
+
+        var total = await query.CountAsync(cancellationToken);
+        var itens = await query.Skip((searchInput.Pagina - 1) * searchInput.Quantidade).Take(searchInput.Quantidade).ToListAsync();
+        return new(searchInput.Pagina, searchInput.Quantidade, total, itens);
     }
 
     public Task Update(Genero objeto, CancellationToken cancellationToken)
     {
         _context.Set<Genero>().Update(objeto);
+
         return Task.CompletedTask;
     }
 }
