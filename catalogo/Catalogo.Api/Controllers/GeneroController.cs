@@ -1,3 +1,4 @@
+using Catalogo.Application.UseCases.Genero.Delete;
 using Catalogo.Application.UseCases.Genero.Get;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -21,6 +22,13 @@ namespace Catalogo.Api.Controllers
         public async Task<IActionResult> Get([FromBody] GetGeneroInput getGeneroInput)
         {
             var response = await _mediator.Send(getGeneroInput);
+            return Ok(response);
+        }
+
+        [HttpPost("delete")]
+        public async Task<IActionResult> Delete([FromBody] DeleteGeneroInput deleteGeneroInput, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(deleteGeneroInput, cancellationToken);
             return Ok(response);
         }
     }
