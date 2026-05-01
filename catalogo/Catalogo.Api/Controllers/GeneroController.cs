@@ -1,3 +1,4 @@
+using Catalogo.Application.UseCases.Genero.Create;
 using Catalogo.Application.UseCases.Genero.Delete;
 using Catalogo.Application.UseCases.Genero.Get;
 using MediatR;
@@ -17,6 +18,12 @@ namespace Catalogo.Api.Controllers
             _mediator = mediator;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateGeneroInput createGeneroInput, CancellationToken cancellationToken)
+        {
+                  var response = await _mediator.Send(createGeneroInput);
+            return Ok(response);
+        }
 
         [HttpPost("obter")]
         public async Task<IActionResult> Get([FromBody] GetGeneroInput getGeneroInput)
