@@ -47,7 +47,7 @@ public class GeneroRepository : IGeneroRepository
     public async Task<SearchOutput<Genero>> Search(SearchInput searchInput, CancellationToken cancellationToken)
     {
         var query = _context.Set<Genero>().AsNoTracking();
-        query = searchInput.Order == SearchOrder.Desc ? query.OrderByDescending(x => x.Nome) : query.OrderBy(x => x.Nome);
+        query = OrderQuery(query,searchInput.Ordernacao,searchInput.Order);
 
         if (!string.IsNullOrEmpty(searchInput.Pesquisa))
             query = query.Where(x => x.Nome.Contains(searchInput.Pesquisa));
@@ -62,5 +62,19 @@ public class GeneroRepository : IGeneroRepository
         _context.Set<Genero>().Update(objeto);
 
         return Task.CompletedTask;
+    }
+
+
+    public IQueryable<Genero> OrderQuery(IQueryable<Genero> query, string orderProperty, SearchOrder order)
+    {
+        var orderQuery = (orderProperty.ToLower(), order) switch
+        {
+            ("nome", SearchOrder.Asc) => query.OrderBy(x => x.Nome).ThenBy(x => x.id),
+            ("nome", SearchOrder.Desc) => query.OrderByDescending(x => x.Nome).ThenBy(x => x.id)
+        };
+
+        return orderQuery;
+
+
     }
 }
