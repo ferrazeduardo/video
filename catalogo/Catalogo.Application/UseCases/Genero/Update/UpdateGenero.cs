@@ -21,7 +21,7 @@ public class UpdateGenero : IRequestHandler<UpdateGeneroInput, UpdateGeneroOutpu
     public async Task<UpdateGeneroOutput> Handle(UpdateGeneroInput request, CancellationToken cancellationToken)
     {
         var genero = await _generoRepository.Get(x => x.idGuid == request.id, cancellationToken);
-        NotFoundException.Object(genero, "Gênero não encontrado.");
+        NotFoundException.IsNull(genero, "Gênero não encontrado.");
 
         genero.Update(request.nome, request.status);
 

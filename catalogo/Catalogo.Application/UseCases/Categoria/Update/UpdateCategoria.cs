@@ -21,7 +21,7 @@ public class UpdateCategoria : IRequestHandler<UpdateCategoriaInput, UpdateCateg
     {
         var categoria = await _categoriaRepository.Get(x => x.idGuid == request.id, cancellationToken);
 
-        NotFoundException.Object(categoria, "Categoria não encontrada");
+        NotFoundException.IsNull(categoria, "Categoria não encontrada");
 
         categoria.Update(request.nome, request.descricao, request.status);
 

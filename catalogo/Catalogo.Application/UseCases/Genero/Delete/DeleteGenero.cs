@@ -1,5 +1,6 @@
 using System;
 using Catalogo.Application.Interface;
+using Catalogo.Domain.Exceptions;
 using Catalogo.Domain.Interface.Repository;
 using MediatR;
 
@@ -17,8 +18,8 @@ public class DeleteGenero : IRequestHandler<DeleteGeneroInput, DeleteGeneroOutpu
     }
     public async Task<DeleteGeneroOutput> Handle(DeleteGeneroInput request, CancellationToken cancellationToken)
     {
-        var genero = new Catalogo.Domain.Entity.Genero();
-        genero.SetIdGuid(request.id);
+        var genero = await _generoRepository.Get(x => x.idGuid == request.id, cancellationToken);
+        NotFoundException.IsNull(genero,"");
         await _generoRepository.Delete(genero, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
         return new DeleteGeneroOutput();

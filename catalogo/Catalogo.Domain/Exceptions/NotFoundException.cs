@@ -9,7 +9,7 @@ public class NotFoundException : Exception
 
     }
 
-    public static void Object(object @object, string mensagem)
+    public static void IsNull(object @object, string mensagem)
     {
         if (@object is null)
             throw new NotFoundException(mensagem);

@@ -29,8 +29,8 @@ public class AddCategoria : IRequestHandler<AddCategoriaInput, AddCategoriaOutpu
     {
         var genero = await _repository.Get(x => x.idGuid == request.Id, cancellationToken);
         var categoria = await _categoriaRepository.Get(x => x.idGuid == request.Id, cancellationToken);
-        NotFoundException.Object(genero, "Genero não encontrado");
-        NotFoundException.Object(categoria, "Categoria não encontrada");
+        NotFoundException.IsNull(genero, "Genero não encontrado");
+        NotFoundException.IsNull(categoria, "Categoria não encontrada");
 
         GenerosCategorias generosCategorias = new GenerosCategorias(genero.id, categoria.id);
 

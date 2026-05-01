@@ -18,7 +18,7 @@ public class GetCategoria : IRequestHandler<GetCategoriaInput, GetCategoriaOutpu
     {
         var categoria = await _categoriaRepository.Get(x => x.idGuid == request.id,cancellationToken);
 
-        NotFoundException.Object(categoria, "Categoria não encontrada");
+        NotFoundException.IsNull(categoria, "Categoria não encontrada");
 
         GetCategoriaOutput<CategoriaModelOutput> getCategoriaOutput = new();
         getCategoriaOutput.Categoria.FromCategoria(categoria);
