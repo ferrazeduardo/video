@@ -10,7 +10,7 @@ public class Genero : AggregationRoot
     public Genero(string nome)
     {
         Nome = nome;
-        dataCriacao = DateTime.UtcNow;
+        DataCriacao = DateTime.UtcNow;
         Validacao();
         Ativo();
     }
@@ -22,7 +22,7 @@ public class Genero : AggregationRoot
 
     public string Nome { get; private set; }
     public string Status { get; private set; }
-    public DateTime dataCriacao { get; private set; }
+    public DateTime DataCriacao { get; private set; }
 
     public List<int> categoriasId { get; private set; } = [];
     public ICollection<GenerosCategorias> _categorias { get; private set; } = [];
