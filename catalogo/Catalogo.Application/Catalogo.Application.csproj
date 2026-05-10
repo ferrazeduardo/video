@@ -22,6 +22,7 @@
     <Folder Include="UseCases/CastFilme/Create/" />
     <Folder Include="UseCases/CastFilme/Delete/" />
     <Folder Include="UseCases/CastFilme/Get/" />
+    <Folder Include="UseCases/CastFilme/List/" />
     <Folder Include="UseCases/CastFilme/Update/" />
     <Folder Include="UseCases/Categoria/Common/" />
     <Folder Include="UseCases/Categoria/Delete/" />
