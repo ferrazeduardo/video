@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using Catalogo.Application.Interface.SearchRepository;
 using Catalogo.Domain.Entity;
 using Catalogo.Domain.Interface.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace Catalogo.Data.EF.Repositories;
 
@@ -20,9 +21,14 @@ public class CastFilmeRepository : ICastFilmeRepository
         throw new NotImplementedException();
     }
 
-    public Task<CastFilme> Get(Expression<Func<CastFilme, bool>> filtro, CancellationToken cancellationToken, bool rastrer = true)
+    public async Task<CastFilme> Get(Expression<Func<CastFilme, bool>> filtro, CancellationToken cancellationToken, bool rastrer = true)
     {
-        throw new NotImplementedException();
+        var query = _context.Set<CastFilme>().AsQueryable();
+
+        if (!rastrer)
+            query = query.AsNoTracking();
+
+        return await query.FirstOrDefaultAsync(filtro,cancellationToken);
     }
 
     public async Task Insert(CastFilme objeto, CancellationToken cancellationToken)
