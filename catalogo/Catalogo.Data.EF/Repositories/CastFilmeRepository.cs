@@ -44,6 +44,7 @@ public class CastFilmeRepository : ICastFilmeRepository
 
     public Task Update(CastFilme objeto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        _context.Set<CastFilme>().Update(objeto);
+        return Task.CompletedTask;
     }
 }
