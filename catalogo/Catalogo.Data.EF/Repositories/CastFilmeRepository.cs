@@ -18,7 +18,8 @@ public class CastFilmeRepository : ICastFilmeRepository
 
     public Task Delete(CastFilme objeto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        _context.Set<CastFilme>().Remove(objeto);
+        return Task.CompletedTask;
     }
 
     public async Task<CastFilme> Get(Expression<Func<CastFilme, bool>> filtro, CancellationToken cancellationToken, bool rastrer = true)
@@ -28,7 +29,7 @@ public class CastFilmeRepository : ICastFilmeRepository
         if (!rastrer)
             query = query.AsNoTracking();
 
-        return await query.FirstOrDefaultAsync(filtro,cancellationToken);
+        return await query.FirstOrDefaultAsync(filtro, cancellationToken);
     }
 
     public async Task Insert(CastFilme objeto, CancellationToken cancellationToken)
