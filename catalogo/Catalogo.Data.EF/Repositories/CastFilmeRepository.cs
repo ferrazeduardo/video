@@ -37,9 +37,18 @@ public class CastFilmeRepository : ICastFilmeRepository
         await _context.Set<CastFilme>().AddAsync(objeto, cancellationToken);
     }
 
-    public Task<SearchOutput<CastFilme>> Search(SearchInput searchInput, CancellationToken cancellationToken)
+    public async Task<SearchOutput<CastFilme>> Search(SearchInput searchInput, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var toSkip = (searchInput.Pagina - 1) * searchInput.Quantidade;
+        var query = _context.Set<CastFilme>().AsNoTracking();
+        query = searchInput.Order == SearchOrder.Desc ? query.OrderByDescending(x => x.Nome) : query.OrderBy(x => x.Nome);
+
+        if (string.IsNullOrEmpty(searchInput.Pesquisa))
+            query = query.Where(q => q.Nome.Contains(searchInput.Pesquisa));
+
+        var items = await query.Skip(toSkip).Take(searchInput.Quantidade).ToListAsync();
+        var count = await query.CountAsync();
+        return new SearchOutput<CastFilme>(searchInput.Pagina, searchInput.Quantidade, count, items);
     }
 
     public Task Update(CastFilme objeto, CancellationToken cancellationToken)
