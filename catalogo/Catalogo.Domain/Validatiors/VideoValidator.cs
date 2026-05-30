@@ -15,6 +15,16 @@ public class VideoValidator : Validation.Validator
 
     public override void Validate()
     {
-        throw new NotImplementedException();
+        if(string.IsNullOrEmpty(_video.Descricao))
+        _handler.HandleError("Descrição é obrigatorio.");
+
+        if(_video.Descricao.Length > 40000)
+            _handler.HandleError("Descrição não pode ter mais de 4000 caracteres.");
+
+        if(string.IsNullOrEmpty(_video.Titulo))
+            _handler.HandleError("Titulo é obrigatório.");
+
+        if(_video.Titulo.Length > 255)
+            _handler.HandleError("Titulo tem que ter menos de 255 caracteres.");
     }
 }
