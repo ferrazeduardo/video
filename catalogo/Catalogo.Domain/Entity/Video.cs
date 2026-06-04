@@ -47,4 +47,14 @@ public class Video : AggregationRoot
         Thumb = new Image(caminho);
     }
 
+    public void UpdateThumbHald(string caminho)
+    {
+        ThumbHalf = new Image(caminho);
+    }
+
+    public void UpdateBanner(string caminho)
+    {
+        banner = new Image(caminho);
+    }
+
 }
