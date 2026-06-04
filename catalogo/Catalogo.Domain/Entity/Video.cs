@@ -28,7 +28,9 @@ public class Video : AggregationRoot
     public int Duracao { get; private set; }
     public int AnoLancamento { get; private set; }
     public Rating Rating { get;private set; }
-    public Image Thumb { get; private set; }
+    public Image? Thumb { get; private set; }
+    public Image? ThumbHalf { get; private set; }
+    public Image? banner { get; private set; }
     public void Validacao()
     {
         var notificationHandler = new NotificationValidationHandler();
@@ -37,6 +39,12 @@ public class Video : AggregationRoot
         if (notificationHandler.HasErros())
             throw new ExcecaoDeDominio("Erros de validação", notificationHandler.Erros);
 
+    }
+
+
+    public void UpdateThumb(string caminho)
+    {
+        Thumb = new Image(caminho);
     }
 
 }
