@@ -13,6 +13,7 @@
     <Folder Include="Extensions/" />
     <Folder Include="Validation/" />
     <Folder Include="Validatiors/" />
+    <Folder Include="ValueObject/" />
   </ItemGroup>
 
 </Project>

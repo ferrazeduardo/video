@@ -4,6 +4,7 @@ using Catalogo.Domain.Exceptions;
 using Catalogo.Domain.SeedWork;
 using Catalogo.Domain.Validation;
 using Catalogo.Domain.Validatiors;
+using Catalogo.Domain.ValueObject;
 
 namespace Catalogo.Domain.Entity;
 
@@ -26,7 +27,8 @@ public class Video : AggregationRoot
     public DateTime DataCriacao { get; private set; }
     public int Duracao { get; private set; }
     public int AnoLancamento { get; private set; }
-    public Rating Rating { get; set; }
+    public Rating Rating { get;private set; }
+    public Image Thumb { get; private set; }
     public void Validacao()
     {
         var notificationHandler = new NotificationValidationHandler();
