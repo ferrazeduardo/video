@@ -10,7 +10,7 @@ namespace Catalogo.Domain.Entity;
 
 public class Video : AggregationRoot
 {
-    public Video(string titulo, string descricao, bool publicado, int duracao, int anoLancamento,Rating rating)
+    public Video(string titulo, string descricao, bool publicado, int duracao, int anoLancamento, Rating rating)
     {
         Titulo = titulo;
         Descricao = descricao;
@@ -27,10 +27,12 @@ public class Video : AggregationRoot
     public DateTime DataCriacao { get; private set; }
     public int Duracao { get; private set; }
     public int AnoLancamento { get; private set; }
-    public Rating Rating { get;private set; }
+    public Rating Rating { get; private set; }
     public Image? Thumb { get; private set; }
     public Image? ThumbHalf { get; private set; }
     public Image? banner { get; private set; }
+    public Media? Media { get; private set; }
+    public Media? Trailer { get; private set; }
     public void Validacao()
     {
         var notificationHandler = new NotificationValidationHandler();
@@ -41,7 +43,15 @@ public class Video : AggregationRoot
 
     }
 
+    public void UpdateMedia(string caminhoArquivo)
+    {
+        Media = new Media(caminhoArquivo);
+    }
 
+    public void UpdateTrailer(string caminhoArquivo)
+    {
+        Trailer = new Media(caminhoArquivo);
+    }
     public void UpdateThumb(string caminho)
     {
         Thumb = new Image(caminho);
