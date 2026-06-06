@@ -67,4 +67,12 @@ public class Video : AggregationRoot
         banner = new Image(caminho);
     }
 
+    public void UpdateProcessando()
+    {
+        if (Media is null)
+            throw new NullReferenceException("Media não encontrada");
+
+        Media.UpdateProcessando();
+    }
+
 }
