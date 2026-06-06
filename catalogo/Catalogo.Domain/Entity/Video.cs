@@ -33,7 +33,7 @@ public class Video : AggregationRoot
     public Image? banner { get; private set; }
     public Media? Media { get; private set; }
     public Media? Trailer { get; private set; }
-    public ICollection<(int, Guid)> Categorias { get; private set; } = [];
+    public ICollection<(int idCategoria, Guid IdGuidCategoria)> Categorias { get; private set; } = [];
     public void Validacao()
     {
         var notificationHandler = new NotificationValidationHandler();
@@ -89,5 +89,9 @@ public class Video : AggregationRoot
         Categorias.Add((idCategoria, categoriaId));
     }
 
+    public void RemoveCategoria(int idCategoria)
+    {
+        Categorias = Categorias.Where(c => c.idCategoria != idCategoria).ToList();
+    }
 
 }
