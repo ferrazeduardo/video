@@ -33,6 +33,7 @@ public class Video : AggregationRoot
     public Image? banner { get; private set; }
     public Media? Media { get; private set; }
     public Media? Trailer { get; private set; }
+    public ICollection<(int, Guid)> Categorias { get; private set; } = [];
     public void Validacao()
     {
         var notificationHandler = new NotificationValidationHandler();
@@ -75,12 +76,17 @@ public class Video : AggregationRoot
         Media.UpdateProcessando();
     }
 
-     public void UpdateProcessado(string caminhoArquivo)
+    public void UpdateProcessado(string caminhoArquivo)
     {
         if (Media is null)
             throw new NullReferenceException("Media não encontrada");
 
         Media.UpdateProcessado(caminhoArquivo);
+    }
+
+    public void AddCategoria(int idCategoria, Guid categoriaId)
+    {
+        Categorias.Add((idCategoria, categoriaId));
     }
 
 

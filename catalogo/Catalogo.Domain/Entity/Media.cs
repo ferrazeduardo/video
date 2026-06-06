@@ -3,7 +3,7 @@ using Catalogo.Domain.Enum;
 
 namespace Catalogo.Domain.Entity;
 
-public class Media
+public class Media  : SeedWork.Entity
 {
     public Media(string caminhoArquivo)
     {
@@ -11,8 +11,8 @@ public class Media
         Status = MediaStatus.Pendente;
     }
 
-    public string CaminhoArquivo { get; set; }
-    public string? EncodingCaminho { get; set; }
+    public string CaminhoArquivo { get; private set; }
+    public string? EncodingCaminho { get; private set; }
     public MediaStatus Status { get; set; }
 
     public void UpdateProcessando()
