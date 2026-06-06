@@ -14,4 +14,15 @@ public class Media
     public string CaminhoArquivo { get; set; }
     public string? EncodingCaminho { get; set; }
     public MediaStatus Status { get; set; }
+
+    public void UpdateProcessando()
+    {
+        Status = MediaStatus.Processando;
+    }
+
+    public void UpdateEncodada(string encodingCaminho)
+    {
+        Status = MediaStatus.Processado;
+        EncodingCaminho = encodingCaminho;
+    }
 }
