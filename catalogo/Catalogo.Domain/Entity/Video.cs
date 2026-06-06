@@ -75,4 +75,13 @@ public class Video : AggregationRoot
         Media.UpdateProcessando();
     }
 
+     public void UpdateProcessado(string caminhoArquivo)
+    {
+        if (Media is null)
+            throw new NullReferenceException("Media não encontrada");
+
+        Media.UpdateProcessado(caminhoArquivo);
+    }
+
+
 }

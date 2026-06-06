@@ -20,7 +20,7 @@ public class Media
         Status = MediaStatus.Processando;
     }
 
-    public void UpdateEncoded(string encodingCaminho)
+    public void UpdateProcessado(string encodingCaminho)
     {
         Status = MediaStatus.Processado;
         EncodingCaminho = encodingCaminho;
