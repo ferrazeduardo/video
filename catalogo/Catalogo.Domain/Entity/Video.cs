@@ -34,6 +34,8 @@ public class Video : AggregationRoot
     public Media? Media { get; private set; }
     public Media? Trailer { get; private set; }
     public ICollection<(int idCategoria, Guid IdGuidCategoria)> Categorias { get; private set; } = [];
+    public ICollection<(int idGenero, Guid idGuidGenero)> Generos { get; private set; } = [];
+    public ICollection<(int idCast, Guid idGuidCast)> CastsFilme { get; private set; } = [];
     public void Validacao()
     {
         var notificationHandler = new NotificationValidationHandler();
@@ -94,4 +96,23 @@ public class Video : AggregationRoot
         Categorias = Categorias.Where(c => c.idCategoria != idCategoria).ToList();
     }
 
+    public void AddGenero(int idGenero, Guid generoId)
+    {
+        Generos.Add((idGenero, generoId));
+    }
+
+    public void RemoveGenero(int idGenero)
+    {
+        Generos = Generos.Where(g => g.idGenero != idGenero).ToList();
+    }
+
+    public void AddCast(int idCast, Guid castId)
+    {
+        CastsFilme.Add((idCast, castId));
+    }
+
+    public void RemoveCast(int idCast)
+    {
+        CastsFilme = CastsFilme.Where(c => c.idCast != idCast).ToList();
+    }
 }
