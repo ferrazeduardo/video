@@ -14,10 +14,10 @@ public class Video : AggregationRoot
     {
         Titulo = titulo;
         Descricao = descricao;
+        AnoLancamento = anoLancamento;
+        Duracao = duracao;
         Publicado = publicado;
         DataCriacao = DateTime.Now;
-        Duracao = duracao;
-        AnoLancamento = anoLancamento;
         Rating = rating;
     }
 
