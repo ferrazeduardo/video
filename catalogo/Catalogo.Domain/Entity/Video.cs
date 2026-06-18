@@ -19,6 +19,7 @@ public class Video : AggregationRoot
         Publicado = publicado;
         DataCriacao = DateTime.Now;
         Rating = rating;
+        Validacao();
     }
 
     public string Titulo { get; private set; }
