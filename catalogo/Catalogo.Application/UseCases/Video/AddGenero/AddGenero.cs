@@ -4,9 +4,9 @@ using Catalogo.Domain.Exceptions;
 using Catalogo.Domain.Interface.Repository;
 using MediatR;
 
-namespace Catalogo.Application.UseCases.Video.VincularGenero;
+namespace Catalogo.Application.UseCases.Video.AddGenero;
 
-public class VincularGenero : IRequestHandler<VincularGeneroInput, VincularGeneroOutput>
+public class VincularGenero : IRequestHandler<AddGeneroInput, AddGeneroOutput>
 {
     private IVideoRespository _videoRespository;
     private IGeneroRepository _generoRepository;
@@ -18,7 +18,7 @@ public class VincularGenero : IRequestHandler<VincularGeneroInput, VincularGener
         _generoRepository = generoRepository;
         _unitOfWork = unitOfWork;
     }
-    public async Task<VincularGeneroOutput> Handle(VincularGeneroInput request, CancellationToken cancellationToken)
+    public async Task<AddGeneroOutput> Handle(AddGeneroInput request, CancellationToken cancellationToken)
     {
         var video = await _videoRespository.Get(x => x.idGuid == request.idVideo, cancellationToken);
         var genero = await _generoRepository.Get(x => x.idGuid == request.idVideo, cancellationToken);
@@ -29,7 +29,7 @@ public class VincularGenero : IRequestHandler<VincularGeneroInput, VincularGener
         video.AddGenero(genero.id, genero.idGuid);
         await _unitOfWork.Commit(cancellationToken);
 
-        return new VincularGeneroOutput();
+        return new AddGeneroOutput();
 
     }
 }
