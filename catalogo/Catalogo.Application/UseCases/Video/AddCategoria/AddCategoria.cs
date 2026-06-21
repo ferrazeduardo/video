@@ -4,9 +4,9 @@ using Catalogo.Domain.Exceptions;
 using Catalogo.Domain.Interface.Repository;
 using MediatR;
 
-namespace Catalogo.Application.UseCases.Video.VincularCategoria;
+namespace Catalogo.Application.UseCases.Video.AddCategoria;
 
-public class VincularCategoria : IRequestHandler<VincularCategoriaInput, VincularCategoriaOuput>
+public class VincularCategoria : IRequestHandler<AddCategoriaInput, AddCategoriaOuput>
 {
     private IUnitOfWork _unitOfWork;
     private ICategoriaRepository _categoriaRepository;
@@ -19,7 +19,7 @@ public class VincularCategoria : IRequestHandler<VincularCategoriaInput, Vincula
         _videoRespository = videoRespository;
     }
 
-    public async Task<VincularCategoriaOuput> Handle(VincularCategoriaInput request, CancellationToken cancellationToken)
+    public async Task<AddCategoriaOuput> Handle(AddCategoriaInput request, CancellationToken cancellationToken)
     {
         var video = await _videoRespository.Get(x => x.idGuid == request.idVideo, cancellationToken);
         var categoria = await _categoriaRepository.Get(x => x.idGuid == request.idCategoria, cancellationToken);
@@ -31,6 +31,6 @@ public class VincularCategoria : IRequestHandler<VincularCategoriaInput, Vincula
 
         await _unitOfWork.Commit(cancellationToken);
 
-        return new VincularCategoriaOuput();
+        return new AddCategoriaOuput();
     }
 }
