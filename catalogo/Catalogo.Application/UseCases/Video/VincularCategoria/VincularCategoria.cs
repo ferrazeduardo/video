@@ -25,7 +25,7 @@ public class VincularCategoria : IRequestHandler<VincularCategoriaInput, Vincula
         var categoria = await _categoriaRepository.Get(x => x.idGuid == request.idCategoria, cancellationToken);
 
         NotFoundException.IsNull(video, "Video não existe");
-        NotFoundException.IsNull(categoria, "Video não existe");
+        NotFoundException.IsNull(categoria, "Categoria não existe");
 
         video.AddCategoria(categoria.id, categoria.idGuid);
 
