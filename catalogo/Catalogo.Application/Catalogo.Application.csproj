@@ -39,6 +39,7 @@
     <Folder Include="UseCases/Video/" />
     <Folder Include="UseCases/Video/Create/" />
     <Folder Include="UseCases/Video/VincularCategoria/" />
+    <Folder Include="UseCases/Video/VincularGenero/" />
   </ItemGroup>
 
 </Project>
