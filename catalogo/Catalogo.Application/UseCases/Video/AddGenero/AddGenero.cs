@@ -1,5 +1,6 @@
 using System;
 using Catalogo.Application.Interface;
+using Catalogo.Domain.Entity;
 using Catalogo.Domain.Exceptions;
 using Catalogo.Domain.Interface.Repository;
 using MediatR;
@@ -11,12 +12,18 @@ public class VincularGenero : IRequestHandler<AddGeneroInput, AddGeneroOutput>
     private IVideoRespository _videoRespository;
     private IGeneroRepository _generoRepository;
     private IUnitOfWork _unitOfWork;
+    private IVideoGeneroReporisoty _videoGeneroReporisoty;
 
-    public VincularGenero(IVideoRespository videoRespository, IGeneroRepository generoRepository, IUnitOfWork unitOfWork)
+    public VincularGenero(
+        IVideoRespository videoRespository,
+        IGeneroRepository generoRepository,
+        IUnitOfWork unitOfWork,
+        IVideoGeneroReporisoty videoGeneroReporisoty)
     {
         _videoRespository = videoRespository;
         _generoRepository = generoRepository;
         _unitOfWork = unitOfWork;
+        _videoGeneroReporisoty = videoGeneroReporisoty;
     }
     public async Task<AddGeneroOutput> Handle(AddGeneroInput request, CancellationToken cancellationToken)
     {
@@ -26,7 +33,9 @@ public class VincularGenero : IRequestHandler<AddGeneroInput, AddGeneroOutput>
         NotFoundException.IsNull(video, "Video não existe");
         NotFoundException.IsNull(genero, "Genero não existe");
 
-        video.AddGenero(genero.id, genero.idGuid);
+        var videoGenero = new VideoGenero(video.id, genero.id);
+
+        await _videoGeneroReporisoty.Create(videoGenero, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
 
         return new AddGeneroOutput();
