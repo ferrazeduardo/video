@@ -17,6 +17,7 @@
   <ItemGroup>
     <Folder Include="Common/" />
     <Folder Include="DependencyInjection/" />
+    <Folder Include="Interfaces/" />
     <Folder Include="UseCases/CastFilme/" />
     <Folder Include="UseCases/CastFilme/Common/" />
     <Folder Include="UseCases/CastFilme/Create/" />
@@ -37,6 +38,7 @@
     <Folder Include="UseCases/Genero/List/" />
     <Folder Include="UseCases/Genero/Update/" />
     <Folder Include="UseCases/Video/AddCast/" />
+    <Folder Include="UseCases/Video/Common/" />
     <Folder Include="UseCases/Video/Create/" />
   </ItemGroup>
 

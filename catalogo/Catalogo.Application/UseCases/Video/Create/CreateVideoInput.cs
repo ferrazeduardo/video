@@ -1,3 +1,4 @@
+using Catalogo.Application.UseCases.Video.Common;
 using Catalogo.Domain.Enum;
 using MediatR;
 
@@ -9,7 +10,8 @@ public record  CreateVideoInput(
     int anoLancamento,
     int duracao,
     Rating rating,
-    bool publicado
+    bool publicado,
+    ArquivoInput thumb
 ) : IRequest<CreateVideoOutput>
 {
 

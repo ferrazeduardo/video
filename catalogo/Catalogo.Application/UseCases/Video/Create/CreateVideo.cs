@@ -1,5 +1,6 @@
 using System;
 using Catalogo.Application.Interface;
+using Catalogo.Application.Interfaces;
 using Catalogo.Domain.Interface.Repository;
 using MediatR;
 using AppDomain = Catalogo.Domain.Entity;
@@ -9,11 +10,13 @@ public class CreateVideo : IRequestHandler<CreateVideoInput, CreateVideoOutput>
 {
     private IVideoRespository _videoRespository;
     private IUnitOfWork _unitOfWork;
+    private IStorageService _storageService;
 
-    public CreateVideo(IVideoRespository videoRespository, IUnitOfWork unitOfWork)
+    public CreateVideo(IVideoRespository videoRespository, IUnitOfWork unitOfWork,IStorageService storageService)
     {
         _videoRespository = videoRespository;
         _unitOfWork = unitOfWork;
+        _storageService = storageService;
     }
     public async Task<CreateVideoOutput> Handle(CreateVideoInput request, CancellationToken cancellationToken)
     {
