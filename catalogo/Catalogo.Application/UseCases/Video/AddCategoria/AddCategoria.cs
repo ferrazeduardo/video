@@ -1,5 +1,6 @@
 using System;
 using Catalogo.Application.Interface;
+using Catalogo.Domain.Entity;
 using Catalogo.Domain.Exceptions;
 using Catalogo.Domain.Interface.Repository;
 using MediatR;
@@ -11,12 +12,18 @@ public class VincularCategoria : IRequestHandler<AddCategoriaInput, AddCategoria
     private IUnitOfWork _unitOfWork;
     private ICategoriaRepository _categoriaRepository;
     private IVideoRespository _videoRespository;
+    private IVideoCategoriaRepository _videoCategoriaRepository;
 
-    public VincularCategoria(IVideoRespository videoRespository, ICategoriaRepository categoriaRepository, IUnitOfWork unitOfWork)
+    public VincularCategoria(
+        IVideoRespository videoRespository,
+        ICategoriaRepository categoriaRepository,
+        IUnitOfWork unitOfWork,
+        IVideoCategoriaRepository videoCategoriaRepository)
     {
         _unitOfWork = unitOfWork;
         _categoriaRepository = categoriaRepository;
         _videoRespository = videoRespository;
+        _videoCategoriaRepository = videoCategoriaRepository;
     }
 
     public async Task<AddCategoriaOuput> Handle(AddCategoriaInput request, CancellationToken cancellationToken)
@@ -27,8 +34,9 @@ public class VincularCategoria : IRequestHandler<AddCategoriaInput, AddCategoria
         NotFoundException.IsNull(video, "Video não existe");
         NotFoundException.IsNull(categoria, "Categoria não existe");
 
-        video.AddCategoria(categoria.id, categoria.idGuid);
+        var videoCategoria = new VideoCategoria(video.id, categoria.id);
 
+        await _videoCategoriaRepository.Create(videoCategoria, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
 
         return new AddCategoriaOuput();
