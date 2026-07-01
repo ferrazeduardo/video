@@ -2,6 +2,7 @@ using System;
 using Catalogo.Application.Common;
 using Catalogo.Application.Interface;
 using Catalogo.Application.Interfaces;
+using Catalogo.Domain.Exceptions;
 using Catalogo.Domain.Interface.Repository;
 using MediatR;
 
@@ -23,7 +24,7 @@ public class UploadMedias : IRequestHandler<UploadMediasInput>
     public async Task Handle(UploadMediasInput request, CancellationToken cancellationToken)
     {
         var video = await _videoRepository.Get(x => x.id == request.idVideo, cancellationToken);
-
+        NotFoundException.IsNull(video, $"Video com id {request.idVideo} não encontrado");
         await UploadVideo(request, video, cancellationToken);
 
         await UpdateTrailer(request, video, cancellationToken);
