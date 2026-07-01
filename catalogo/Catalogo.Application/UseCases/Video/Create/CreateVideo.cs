@@ -30,6 +30,12 @@ public class CreateVideo : IRequestHandler<CreateVideoInput, CreateVideoOutput>
             video.UpdateThumb(thumbUrl);
         }
 
+          if (request.banner is not null)
+        {
+            var url = await _storageService.Upload($"{video.id}-banner.{request.banner.extension}", request.banner.arquivoStream, cancellationToken);
+            video.UpdateBanner(url);
+        }
+
         await _unitOfWork.Commit(cancellationToken);
 
         return new CreateVideoOutput(video.idGuid);
