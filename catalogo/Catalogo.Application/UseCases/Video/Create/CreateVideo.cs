@@ -12,7 +12,7 @@ public class CreateVideo : IRequestHandler<CreateVideoInput, CreateVideoOutput>
     private IUnitOfWork _unitOfWork;
     private IStorageService _storageService;
 
-    public CreateVideo(IVideoRespository videoRespository, IUnitOfWork unitOfWork,IStorageService storageService)
+    public CreateVideo(IVideoRespository videoRespository, IUnitOfWork unitOfWork, IStorageService storageService)
     {
         _videoRespository = videoRespository;
         _unitOfWork = unitOfWork;
@@ -23,6 +23,12 @@ public class CreateVideo : IRequestHandler<CreateVideoInput, CreateVideoOutput>
         var video = new AppDomain.Video(request.titulo, request.descricao, request.publicado, request.duracao, request.anoLancamento, request.rating);
 
         await _videoRespository.Insert(video, cancellationToken);
+
+        if (request.thumb is not null)
+        {
+            var thumbUrl = await _storageService.Upload($"{video.id}-thumb.{request.thumb.extension}", request.thumb.arquivoStream, cancellationToken);
+            video.UpdateThumb(thumbUrl);
+        }
 
         await _unitOfWork.Commit(cancellationToken);
 

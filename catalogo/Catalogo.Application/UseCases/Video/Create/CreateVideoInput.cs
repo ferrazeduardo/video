@@ -11,7 +11,8 @@ public record  CreateVideoInput(
     int duracao,
     Rating rating,
     bool publicado,
-    ArquivoInput thumb
+    ArquivoInput thumb,
+    ArquivoInput banner
 ) : IRequest<CreateVideoOutput>
 {
 
