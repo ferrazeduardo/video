@@ -35,7 +35,8 @@ public class CreateVideo : IRequestHandler<CreateVideoInput, CreateVideoOutput>
             await DeleteThumb(video, cancellationToken);
             await DeleteBanner(video, cancellationToken);
             await DeleteThumbHalf(video, cancellationToken);
-            throw;
+            
+            throw new ApplicationException($"Erro ao salvar o video {request.descricao}", ex);
         }
 
         await _unitOfWork.Commit(cancellationToken);
