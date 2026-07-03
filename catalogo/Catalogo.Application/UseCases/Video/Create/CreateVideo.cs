@@ -29,17 +29,18 @@ public class CreateVideo : IRequestHandler<CreateVideoInput, CreateVideoOutput>
             await UploadBanner(request, video, cancellationToken);
             await UploadThumbHalf(request, video, cancellationToken);
             await _videoRespository.Insert(video, cancellationToken);
+            await _unitOfWork.Commit(cancellationToken);
+
         }
         catch (Exception ex)
         {
             await DeleteThumb(video, cancellationToken);
             await DeleteBanner(video, cancellationToken);
             await DeleteThumbHalf(video, cancellationToken);
-            
+
             throw new ApplicationException($"Erro ao salvar o video {request.descricao}", ex);
         }
 
-        await _unitOfWork.Commit(cancellationToken);
 
         return new CreateVideoOutput(video.idGuid);
     }
