@@ -25,13 +25,39 @@ public class UploadMedias : IRequestHandler<UploadMediasInput>
     {
         var video = await _videoRepository.Get(x => x.id == request.idVideo, cancellationToken);
         NotFoundException.IsNull(video, $"Video com id {request.idVideo} não encontrado");
-        await UploadVideo(request, video, cancellationToken);
 
-        await UpdateTrailer(request, video, cancellationToken);
+        try
+        {
+            await UploadVideo(request, video, cancellationToken);
 
-        await _videoRepository.Update(video, cancellationToken);
-        await _unitOfWork.Commit(cancellationToken);
+            await UpdateTrailer(request, video, cancellationToken);
 
+            await _videoRepository.Update(video, cancellationToken);
+            await _unitOfWork.Commit(cancellationToken);
+
+        }
+        catch (Exception ex)
+        {
+            await DeleteMedia(request, video, cancellationToken);
+
+            await DeleteTrailer(request, video, cancellationToken);
+
+            throw new ApplicationException($"Erro ao fazer upload do video {request.idVideo}", ex);
+        }
+
+
+    }
+
+    private async Task DeleteTrailer(UploadMediasInput request, Domain.Entity.Video video, CancellationToken cancellationToken)
+    {
+        if (request.trailerInput is not null && video.Trailer is not null)
+            await _storageService.Delete(video.Trailer.CaminhoArquivo, cancellationToken);
+    }
+
+    private async Task DeleteMedia(UploadMediasInput request, Domain.Entity.Video video, CancellationToken cancellationToken)
+    {
+        if (request.arquivoVideo is not null && video.Media is not null)
+            await _storageService.Delete(video.Media.CaminhoArquivo, cancellationToken);
     }
 
     private async Task UpdateTrailer(UploadMediasInput request, Domain.Entity.Video video, CancellationToken cancellationToken)
