@@ -27,13 +27,37 @@ public class DeleteVideo : IRequestHandler<DeleteVideoInput, DeleteVideoOutput>
 
         await _videoRepository.Delete(video, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
-
-        if(video.Thumb is not null) await _storageService.Delete(video.Thumb.caminho, cancellationToken);
-        if(video.banner is not null) await _storageService.Delete(video.banner.caminho, cancellationToken);
-        if(video.ThumbHalf is not null) await _storageService.Delete(video.ThumbHalf.caminho, cancellationToken);
-        if(video.Media is not null) await _storageService.Delete(video.Media.CaminhoArquivo, cancellationToken);
-        if(video.Trailer is not null) await _storageService.Delete(video.Trailer.CaminhoArquivo, cancellationToken);
+        await DeleteThumb(video, cancellationToken);
+        await DeleteBanner(video, cancellationToken);
+        await DeleteThumbHalf(video, cancellationToken);
+        await DeleteMedia(video, cancellationToken);
+        await DeleteTrailer(video, cancellationToken);
 
         return new DeleteVideoOutput();
+    }
+
+    private async Task DeleteTrailer(Domain.Entity.Video video, CancellationToken cancellationToken)
+    {
+        if (video.Trailer is not null) await _storageService.Delete(video.Trailer.CaminhoArquivo, cancellationToken);
+    }
+
+    private async Task DeleteMedia(Domain.Entity.Video video, CancellationToken cancellationToken)
+    {
+        if (video.Media is not null) await _storageService.Delete(video.Media.CaminhoArquivo, cancellationToken);
+    }
+
+    private async Task DeleteThumbHalf(Domain.Entity.Video video, CancellationToken cancellationToken)
+    {
+        if (video.ThumbHalf is not null) await _storageService.Delete(video.ThumbHalf.caminho, cancellationToken);
+    }
+
+    private async Task DeleteBanner(Domain.Entity.Video video, CancellationToken cancellationToken)
+    {
+        if (video.banner is not null) await _storageService.Delete(video.banner.caminho, cancellationToken);
+    }
+
+    private async Task DeleteThumb(Domain.Entity.Video video, CancellationToken cancellationToken)
+    {
+        if (video.Thumb is not null) await _storageService.Delete(video.Thumb.caminho, cancellationToken);
     }
 }
