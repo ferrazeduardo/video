@@ -28,6 +28,12 @@ public class DeleteVideo : IRequestHandler<DeleteVideoInput, DeleteVideoOutput>
         await _videoRepository.Delete(video, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
 
+        if(video.Thumb is not null) await _storageService.Delete(video.Thumb.caminho, cancellationToken);
+        if(video.banner is not null) await _storageService.Delete(video.banner.caminho, cancellationToken);
+        if(video.ThumbHalf is not null) await _storageService.Delete(video.ThumbHalf.caminho, cancellationToken);
+        if(video.Media is not null) await _storageService.Delete(video.Media.CaminhoArquivo, cancellationToken);
+        if(video.Trailer is not null) await _storageService.Delete(video.Trailer.CaminhoArquivo, cancellationToken);
+
         return new DeleteVideoOutput();
     }
 }
