@@ -28,7 +28,7 @@ public class ListVideo : IRequestHandler<ListVideoInput, ListVideoOutput>
             result.paginaAtual,
             result.Quantidade,
             result.Total,
-            result.Itens.Select<Domain.Entity.Video, VideoModelOutput>(i => new VideoModelOutput(i.idGuid,i.Titulo,i.Descricao,i.AnoLancamento,i.Duracao,i.Thumb.caminho,i.banner.caminho,i.Media.CaminhoArquivo,i.ThumbHalf.caminho,i.Trailer.CaminhoArquivo)).ToList()
+            result.Itens.Select<Domain.Entity.Video, VideoModelOutput>(i => new VideoModelOutput(i.idGuid,i.Titulo,i.Descricao,i.AnoLancamento,i.Duracao,i.Categorias.Select(c => c.IdGuidCategoria).ToList(),i.Generos.Select(g => g.idGuidGenero).ToList(),i.CastsFilme.Select(c => c.idGuidCast).ToList(),i.Thumb.caminho,i.banner.caminho,i.Media.CaminhoArquivo,i.ThumbHalf.caminho,i.Trailer.CaminhoArquivo)).ToList()
         );
 
         return output;
