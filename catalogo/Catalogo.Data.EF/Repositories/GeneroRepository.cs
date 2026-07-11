@@ -77,4 +77,9 @@ public class GeneroRepository : IGeneroRepository
 
 
     }
+
+    public Task<List<Genero>?> ListPorIds(List<Guid> generosId, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }

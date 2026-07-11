@@ -52,4 +52,9 @@ public class CategoriaRepository : ICategoriaRepository
 
         return await query.FirstOrDefaultAsync(filtro, cancellationToken);
     }
+
+    public Task<List<Categoria>?> ListPorIds(List<Guid> categoriasId, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }
