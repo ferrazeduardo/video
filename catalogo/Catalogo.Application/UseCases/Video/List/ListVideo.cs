@@ -55,13 +55,13 @@ public class ListVideo : IRequestHandler<ListVideoInput, ListVideoOutput>
             result.paginaAtual,
             result.Quantidade,
             result.Total,
-            result.Itens.Select<Domain.Entity.Video, VideoModelOutput>(NewMethod(categorias,generos,cast)).ToList()
+            result.Itens.Select<Domain.Entity.Video, VideoModelOutput>(MapVideoToOutput(categorias,generos,cast)).ToList()
         );
 
         return output;
     }
 
-    private Func<Domain.Entity.Video, VideoModelOutput> NewMethod(List<Catalogo.Domain.Entity.Categoria>? categorias, List<Catalogo.Domain.Entity.Genero> generos, List<Catalogo.Domain.Entity.CastFilme> cast)
+    private Func<Domain.Entity.Video, VideoModelOutput> MapVideoToOutput(List<Catalogo.Domain.Entity.Categoria>? categorias, List<Catalogo.Domain.Entity.Genero> generos, List<Catalogo.Domain.Entity.CastFilme> cast)
     {
         return i => new VideoModelOutput(
             i.idGuid,
