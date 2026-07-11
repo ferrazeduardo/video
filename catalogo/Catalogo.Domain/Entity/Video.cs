@@ -116,4 +116,15 @@ public class Video : AggregationRoot
     {
         CastsFilme = CastsFilme.Where(c => c != idCast).ToList();
     }
+
+    public void Update(string titulo, string descricao, int anoLancamento, int duracao, bool publicado, Rating rating)
+    {
+        Titulo = titulo ?? Titulo;
+        Descricao = descricao ?? Descricao;  
+        AnoLancamento = anoLancamento != 0 ? anoLancamento : AnoLancamento;
+        Duracao = duracao != 0 ? duracao : Duracao;
+        Publicado = publicado != Publicado ? publicado : Publicado;
+        Rating = rating != Rating ? rating : Rating;
+        Validacao();
+    }
 }

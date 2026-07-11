@@ -43,6 +43,7 @@
     <Folder Include="UseCases/Video/Delete/" />
     <Folder Include="UseCases/Video/Get/" />
     <Folder Include="UseCases/Video/List/" />
+    <Folder Include="UseCases/Video/Update/" />
     <Folder Include="UseCases/Video/UpdloadMedias/" />
   </ItemGroup>
 
