@@ -34,9 +34,9 @@ public class Video : AggregationRoot
     public Image? banner { get; private set; }
     public Media? Media { get; private set; }
     public Media? Trailer { get; private set; }
-    public ICollection<(int idCategoria, Guid IdGuidCategoria)> Categorias { get; private set; } = [];
-    public ICollection<(int idGenero, Guid idGuidGenero)> Generos { get; private set; } = [];
-    public ICollection<(int idCast, Guid idGuidCast)> CastsFilme { get; private set; } = [];
+    public ICollection<Guid> Categorias { get; private set; } = [];
+    public ICollection<Guid> Generos { get; private set; } = [];
+    public ICollection<Guid> CastsFilme { get; private set; } = [];
     public void Validacao()
     {
         var notificationHandler = new NotificationValidationHandler();
@@ -87,33 +87,33 @@ public class Video : AggregationRoot
         Media.UpdateProcessado(caminhoArquivo);
     }
 
-    public void AddCategoria(int idCategoria, Guid categoriaId)
+    public void AddCategoria(Guid categoriaId)
     {
-        Categorias.Add((idCategoria, categoriaId));
+        Categorias.Add(categoriaId);
     }
 
-    public void RemoveCategoria(int idCategoria)
+    public void RemoveCategoria(Guid idCategoria)
     {
-        Categorias = Categorias.Where(c => c.idCategoria != idCategoria).ToList();
+        Categorias = Categorias.Where(c => c != idCategoria).ToList();
     }
 
-    public void AddGenero(int idGenero, Guid generoId)
+    public void AddGenero( Guid generoId)
     {
-        Generos.Add((idGenero, generoId));
+        Generos.Add(generoId);
     }
 
-    public void RemoveGenero(int idGenero)
+    public void RemoveGenero(Guid idGenero)
     {
-        Generos = Generos.Where(g => g.idGenero != idGenero).ToList();
+        Generos = Generos.Where(g => g != idGenero).ToList();
     }
 
-    public void AddCast(int idCast, Guid castId)
+    public void AddCast(Guid castId)
     {
-        CastsFilme.Add((idCast, castId));
+        CastsFilme.Add(castId);
     }
 
-    public void RemoveCast(int idCast)
+    public void RemoveCast(Guid idCast)
     {
-        CastsFilme = CastsFilme.Where(c => c.idCast != idCast).ToList();
+        CastsFilme = CastsFilme.Where(c => c != idCast).ToList();
     }
 }

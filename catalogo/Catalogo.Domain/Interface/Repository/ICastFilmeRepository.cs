@@ -6,5 +6,5 @@ namespace Catalogo.Domain.Interface.Repository;
 
 public interface ICastFilmeRepository : IRepository<CastFilme>, ISearchRepository<CastFilme>
 {
-
+    Task<List<CastFilme>?> ListPorIds(List<Guid> castId, CancellationToken cancellationToken);
 }
