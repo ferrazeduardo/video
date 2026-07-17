@@ -86,20 +86,12 @@ public class Video : AggregationRoot
 
         Media.UpdateProcessado(caminhoArquivo);
     }
-   
 
-    public void AddGenero(int generoId)
-    {
-        Generos.Add(generoId);
-    }
-
-
- 
 
     public void Update(string titulo, string descricao, int anoLancamento, int duracao, bool publicado, Rating rating)
     {
         Titulo = titulo ?? Titulo;
-        Descricao = descricao ?? Descricao;  
+        Descricao = descricao ?? Descricao;
         AnoLancamento = anoLancamento != 0 ? anoLancamento : AnoLancamento;
         Duracao = duracao != 0 ? duracao : Duracao;
         Publicado = publicado != Publicado ? publicado : Publicado;
