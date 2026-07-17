@@ -34,9 +34,9 @@ public class Video : AggregationRoot
     public Image? banner { get; private set; }
     public Media? Media { get; private set; }
     public Media? Trailer { get; private set; }
-    public ICollection<Guid> Categorias { get; private set; } = [];
-    public ICollection<Guid> Generos { get; private set; } = [];
-    public ICollection<Guid> CastsFilme { get; private set; } = [];
+    public ICollection<int> Categorias { get; private set; } = [];
+    public ICollection<int> Generos { get; private set; } = [];
+    public ICollection<int> CastsFilme { get; private set; } = [];
     public void Validacao()
     {
         var notificationHandler = new NotificationValidationHandler();
@@ -86,36 +86,15 @@ public class Video : AggregationRoot
 
         Media.UpdateProcessado(caminhoArquivo);
     }
+   
 
-    public void AddCategoria(Guid categoriaId)
-    {
-        Categorias.Add(categoriaId);
-    }
-
-    public void RemoveCategoria(Guid idCategoria)
-    {
-        Categorias = Categorias.Where(c => c != idCategoria).ToList();
-    }
-
-    public void AddGenero( Guid generoId)
+    public void AddGenero(int generoId)
     {
         Generos.Add(generoId);
     }
 
-    public void RemoveGenero(Guid idGenero)
-    {
-        Generos = Generos.Where(g => g != idGenero).ToList();
-    }
 
-    public void AddCast(Guid castId)
-    {
-        CastsFilme.Add(castId);
-    }
-
-    public void RemoveCast(Guid idCast)
-    {
-        CastsFilme = CastsFilme.Where(c => c != idCast).ToList();
-    }
+ 
 
     public void Update(string titulo, string descricao, int anoLancamento, int duracao, bool publicado, Rating rating)
     {

@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Catalogo.Application.UseCases.Video.Update;
 
-public record UpdateVideoInput(Guid id, string titulo, string descricao, int anoLancamento,int duracao,bool publicado,Rating rating) : IRequest<UpdateVideoOutput>;
+public record UpdateVideoInput(Guid id, string titulo, string descricao, int anoLancamento,int duracao,bool publicado,Rating rating,List<Guid>? generosIds = null) : IRequest<UpdateVideoOutput>;
