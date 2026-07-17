@@ -1,6 +1,7 @@
 using System;
 using Catalogo.Application.Interface;
 using Catalogo.Domain.Entity;
+using AppDomain = Catalogo.Domain.Entity;
 using Catalogo.Domain.Exceptions;
 using Catalogo.Domain.Interface.Repository;
 using MediatR;
@@ -27,18 +28,32 @@ public class VincularGenero : IRequestHandler<AddGeneroInput, AddGeneroOutput>
     }
     public async Task<AddGeneroOutput> Handle(AddGeneroInput request, CancellationToken cancellationToken)
     {
-        var video = await _videoRespository.Get(x => x.idGuid == request.idVideo, cancellationToken);
-        var genero = await _generoRepository.Get(x => x.idGuid == request.idVideo, cancellationToken);
+        var video = await _videoRespository.Get(x => x.idGuid == request.videoId, cancellationToken);
+        var generos = await _generoRepository.ListPorIds(request.generoId, cancellationToken);
 
         NotFoundException.IsNull(video, "Video não existe");
-        NotFoundException.IsNull(genero, "Genero não existe");
+        await ValidacaoAddGeneros(request, generos);
 
-        var videoGenero = new VideoGenero(video.id, genero.id);
+        foreach (var genero in generos)
+        {
+            var videoGenero = new VideoGenero(video.id, genero.id);
+            await _videoGeneroReporisoty.Create(videoGenero, cancellationToken);
+        }
 
-        await _videoGeneroReporisoty.Create(videoGenero, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
 
         return new AddGeneroOutput();
 
     }
+
+
+    private async Task ValidacaoAddGeneros(AddGeneroInput request, List<AppDomain.Genero> generos)
+    {
+        if (request.generoId.Count < generos.Count)
+        {
+            var idsNaoEncontrados = request.generoId.Where(idGuid => generos.Any(genero => idGuid == genero.idGuid) is false);
+            throw new ArgumentException("Categorias não encontradas: " + string.Join(',', idsNaoEncontrados.ToString()));
+        }
+    }
+
 }
