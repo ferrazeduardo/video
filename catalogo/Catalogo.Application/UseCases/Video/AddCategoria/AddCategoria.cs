@@ -8,14 +8,14 @@ using AppDomain = Catalogo.Domain.Entity;
 
 namespace Catalogo.Application.UseCases.Video.AddCategoria;
 
-public class VincularCategoria : IRequestHandler<AddCategoriaInput, AddCategoriaOuput>
+public class AddCategoria : IRequestHandler<AddCategoriaInput, AddCategoriaOuput>
 {
     private IUnitOfWork _unitOfWork;
     private ICategoriaRepository _categoriaRepository;
     private IVideoRespository _videoRespository;
     private IVideoCategoriaRepository _videoCategoriaRepository;
 
-    public VincularCategoria(
+    public AddCategoria(
         IVideoRespository videoRespository,
         ICategoriaRepository categoriaRepository,
         IUnitOfWork unitOfWork,
