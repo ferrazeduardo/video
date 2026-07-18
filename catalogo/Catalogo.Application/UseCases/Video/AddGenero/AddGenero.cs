@@ -32,7 +32,7 @@ public class VincularGenero : IRequestHandler<AddGeneroInput, AddGeneroOutput>
         var generos = await _generoRepository.ListPorIds(request.generoId, cancellationToken);
 
         NotFoundException.IsNull(video, "Video não existe");
-        await ValidacaoAddGeneros(request, generos);
+        ValidacaoAddGeneros(request, generos);
 
         foreach (var genero in generos)
         {
@@ -47,7 +47,7 @@ public class VincularGenero : IRequestHandler<AddGeneroInput, AddGeneroOutput>
     }
 
 
-    private async Task ValidacaoAddGeneros(AddGeneroInput request, List<AppDomain.Genero> generos)
+    private void ValidacaoAddGeneros(AddGeneroInput request, List<AppDomain.Genero> generos)
     {
         if (request.generoId.Count < generos.Count)
         {
