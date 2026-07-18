@@ -4,6 +4,7 @@ using Catalogo.Domain.Entity;
 using Catalogo.Domain.Exceptions;
 using Catalogo.Domain.Interface.Repository;
 using MediatR;
+using AppDomain = Catalogo.Domain.Entity;
 
 namespace Catalogo.Application.UseCases.Video.AddCast;
 
@@ -29,16 +30,28 @@ public class AddCast : IRequestHandler<AddCastInput, AddCastOutput>
     public async Task<AddCastOutput> Handle(AddCastInput request, CancellationToken cancellationToken)
     {
         var video = await _videoRespository.Get(x => x.id == request.idVideio, cancellationToken);
-        var cast = await _castFilmeRepository.Get(x => x.id == request.idCastFilme, cancellationToken);
+        var casts = await _castFilmeRepository.ListPorIds(request.idCastFilme, cancellationToken);
 
-        NotFoundException.IsNull(video,"Vídeo não Existe");
-        NotFoundException.IsNull(cast, "Cast não existe");
+        NotFoundException.IsNull(video, "Vídeo não Existe");
+        ValidacaoAddCast(request, casts);
 
-        var videCastFilme = new VideoCastFilme(video.id, cast.id);
-
-        await _videoCastFilmeRepository.Create(videCastFilme,cancellationToken);
+        foreach (var cast in casts)
+        {
+            var videCastFilme = new VideoCastFilme(video.id, cast.id);
+            await _videoCastFilmeRepository.Create(videCastFilme, cancellationToken);
+        }
         await _unitOfWork.Commit(cancellationToken);
 
         return new AddCastOutput();
+    }
+
+
+    public void ValidacaoAddCast(AddCastInput request, List<AppDomain.CastFilme> castFilmes)
+    {
+        if (request.idCastFilme.Count > castFilmes.Count)
+        {
+            var idsNaoEncontrados = request.idCastFilme.Where(idGuid => castFilmes.Any(cast => cast.idGuid == idGuid) is false).ToList();
+            throw new ArgumentException("Casts não encontrados: " + string.Join(',', idsNaoEncontrados.ToString()));
+        }
     }
 }

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Catalogo.Application.UseCases.Video.AddCast;
 
-public record AddCastInput(int idVideio, int idCastFilme) : IRequest<AddCastOutput> 
+public record AddCastInput(int idVideio, List<Guid> idCastFilme) : IRequest<AddCastOutput> 
 {
 
 }
