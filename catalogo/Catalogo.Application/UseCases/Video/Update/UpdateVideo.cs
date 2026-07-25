@@ -1,6 +1,9 @@
 using System;
+using Catalogo.Application.Common;
 using Catalogo.Application.Interface;
+using Catalogo.Application.Interfaces;
 using Catalogo.Domain.Exceptions;
+using AppDomain = Catalogo.Domain.Entity;
 using Catalogo.Domain.Interface.Repository;
 using MediatR;
 
@@ -10,11 +13,16 @@ public class UpdateVideo : IRequestHandler<UpdateVideoInput, UpdateVideoOutput>
 {
     private IVideoRespository _videoRepository;
     private IUnitOfWork _unitOfWork;
+    private IStorageService _storageService;
 
-    public UpdateVideo(IVideoRespository videoRepository, IUnitOfWork unitOfWork)
+    public UpdateVideo(
+     IVideoRespository videoRepository,
+     IUnitOfWork unitOfWork,
+     IStorageService storageService)
     {
         _videoRepository = videoRepository;
         _unitOfWork = unitOfWork;
+        _storageService = storageService;
     }
     public async Task<UpdateVideoOutput> Handle(UpdateVideoInput request, CancellationToken cancellationToken)
     {
@@ -22,8 +30,18 @@ public class UpdateVideo : IRequestHandler<UpdateVideoInput, UpdateVideoOutput>
         NotFoundException.IsNull(video, "Video não encontrado");
 
         video.Update(request.titulo, request.descricao, request.anoLancamento, request.duracao, request.publicado, request.rating);
+        await UploadImageMedia(request,video,cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
 
         return new UpdateVideoOutput();
+    }
+
+    private async Task UploadImageMedia(UpdateVideoInput request, AppDomain.Video video, CancellationToken cancellationToken)
+    {
+        if (request.banner is null) return;
+
+        var arquivoNome = StorageName.Create(video.id, nameof(video.banner), request.banner.extension);
+        var bannerUrl = await _storageService.Upload(arquivoNome, request.banner.arquivoStream, cancellationToken);
+        video.UpdateBanner(bannerUrl);
     }
 }
