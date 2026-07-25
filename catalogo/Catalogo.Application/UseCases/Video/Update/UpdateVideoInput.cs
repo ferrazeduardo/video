@@ -15,4 +15,5 @@ public record UpdateVideoInput(
     Rating rating,
     ArquivoInput banner = null,
     ArquivoInput thumb = null,
+    ArquivoInput thumbHalf = null,
     List<Guid>? generosIds = null) : IRequest<UpdateVideoOutput>;
