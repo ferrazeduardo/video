@@ -30,18 +30,27 @@ public class UpdateVideo : IRequestHandler<UpdateVideoInput, UpdateVideoOutput>
         NotFoundException.IsNull(video, "Video não encontrado");
 
         video.Update(request.titulo, request.descricao, request.anoLancamento, request.duracao, request.publicado, request.rating);
-        await UploadImageMedia(request,video,cancellationToken);
+        await UploadImageBanner(request,video,cancellationToken);
+        await UploadImageThumb(request,video,cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
 
         return new UpdateVideoOutput();
     }
 
-    private async Task UploadImageMedia(UpdateVideoInput request, AppDomain.Video video, CancellationToken cancellationToken)
+    private async Task UploadImageBanner(UpdateVideoInput request, AppDomain.Video video, CancellationToken cancellationToken)
     {
         if (request.banner is null) return;
 
         var arquivoNome = StorageName.Create(video.id, nameof(video.banner), request.banner.extension);
         var bannerUrl = await _storageService.Upload(arquivoNome, request.banner.arquivoStream, cancellationToken);
         video.UpdateBanner(bannerUrl);
+    }
+    private async Task UploadImageThumb(UpdateVideoInput request, AppDomain.Video video, CancellationToken cancellationToken)
+    {
+        if (request.thumb is null) return;
+
+        var arquivoNome = StorageName.Create(video.id, nameof(video.Thumb), request.thumb.extension);
+        var thumbUrl = await _storageService.Upload(arquivoNome, request.thumb.arquivoStream, cancellationToken);
+        video.UpdateBanner(thumbUrl);
     }
 }
