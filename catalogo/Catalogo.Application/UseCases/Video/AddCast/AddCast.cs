@@ -50,7 +50,7 @@ public class AddCast : IRequestHandler<AddCastInput, AddCastOutput>
     {
         if (request.idCastFilme.Count > castFilmes.Count)
         {
-            var idsNaoEncontrados = request.idCastFilme.Where(idGuid => castFilmes.Any(cast => cast.idGuid == idGuid) is false).ToList();
+            var idsNaoEncontrados = request.idCastFilme.Where(id => castFilmes.Any(cast => cast.id == id) is false).ToList();
             throw new ArgumentException("Casts não encontrados: " + string.Join(',', idsNaoEncontrados.ToString()));
         }
     }

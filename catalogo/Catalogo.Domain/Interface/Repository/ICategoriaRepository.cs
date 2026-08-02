@@ -6,5 +6,5 @@ namespace Catalogo.Domain.Interface.Repository;
 
 public interface ICategoriaRepository : IRepository<Categoria>, ISearchRepository<Categoria>
 {
-    Task<List<Categoria>?> ListPorIds(List<Guid> categoriasId, CancellationToken cancellationToken);
+    Task<List<Categoria>?> ListPorIds(List<int> categoriasId, CancellationToken cancellationToken);
 }

@@ -49,9 +49,9 @@ public class VincularGenero : IRequestHandler<AddGeneroInput, AddGeneroOutput>
 
     private void ValidacaoAddGeneros(AddGeneroInput request, List<AppDomain.Genero> generos)
     {
-        if (request.generoId.Count < generos.Count)
+        if (request.generoId.Count > generos.Count)
         {
-            var idsNaoEncontrados = request.generoId.Where(idGuid => generos.Any(genero => idGuid == genero.idGuid) is false);
+            var idsNaoEncontrados = request.generoId.Where(id => generos.Any(genero => id == genero.id) is false);
             throw new ArgumentException("Categorias não encontradas: " + string.Join(',', idsNaoEncontrados.ToString()));
         }
     }

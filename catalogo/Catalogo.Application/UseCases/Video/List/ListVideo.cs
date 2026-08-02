@@ -33,9 +33,9 @@ public class ListVideo : IRequestHandler<ListVideoInput, ListVideoOutput>
             request.order
         ), cancellationToken);
 
-        List<Guid> categoriasId = result.Itens.SelectMany(i => i.Categorias).ToList();
-        List<Guid> generosId = result.Itens.SelectMany(i => i.Generos).ToList();
-        List<Guid> castId = result.Itens.SelectMany(i => i.CastsFilme).ToList();
+        List<int> categoriasId = result.Itens.SelectMany(i => i.Categorias).ToList();
+        List<int> generosId = result.Itens.SelectMany(i => i.Generos).ToList();
+        List<int> castId = result.Itens.SelectMany(i => i.CastsFilme).ToList();
 
         List<Catalogo.Domain.Entity.Categoria>? categorias = null;
         if(categoriasId.Any())

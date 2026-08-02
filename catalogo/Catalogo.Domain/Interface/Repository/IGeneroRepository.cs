@@ -6,5 +6,5 @@ namespace Catalogo.Domain.Interface.Repository;
 
 public interface IGeneroRepository : ISearchRepository<Domain.Entity.Genero>, IRepository<Domain.Entity.Genero>
 {
-    Task<List<Genero>?> ListPorIds(List<Guid> generosId, CancellationToken cancellationToken);
+    Task<List<Genero>?> ListPorIds(List<int> generosId, CancellationToken cancellationToken);
 }

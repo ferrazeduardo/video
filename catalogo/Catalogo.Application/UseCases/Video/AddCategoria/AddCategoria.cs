@@ -48,9 +48,9 @@ public class AddCategoria : IRequestHandler<AddCategoriaInput, AddCategoriaOuput
 
     public void ValidacaoAddCategoria(AddCategoriaInput addCategoriaInput, List<AppDomain.Categoria> categorias)
     {
-        if (addCategoriaInput.idCategoria.Count < categorias.Count)
+        if (addCategoriaInput.idCategoria.Count > categorias.Count)
         {
-            var idsNaoEncontrados = addCategoriaInput.idCategoria.Where(idGuid => categorias.Any(categoria => categoria.idGuid == idGuid) is false);
+            var idsNaoEncontrados = addCategoriaInput.idCategoria.Where(id => categorias.Any(categoria => categoria.id == id) is false);
             throw new ArgumentException("Categorias não encontradas: " + string.Join(',', idsNaoEncontrados.ToString()));
         }
     }

@@ -78,8 +78,8 @@ public class GeneroRepository : IGeneroRepository
 
     }
 
-    public Task<List<Genero>?> ListPorIds(List<Guid> generosId, CancellationToken cancellationToken)
+    public async Task<List<Genero>?> ListPorIds(List<int> generosId, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _context.Set<Genero>().Where(x => generosId.Contains(x.id)).ToListAsync(cancellationToken);
     }
 }

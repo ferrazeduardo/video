@@ -53,8 +53,8 @@ public class CategoriaRepository : ICategoriaRepository
         return await query.FirstOrDefaultAsync(filtro, cancellationToken);
     }
 
-    public Task<List<Categoria>?> ListPorIds(List<Guid> categoriasId, CancellationToken cancellationToken)
+    public async Task<List<Categoria>?> ListPorIds(List<int> categoriasId, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _categorias.Where(x => categoriasId.Contains(x.id)).ToListAsync(cancellationToken);
     }
 }

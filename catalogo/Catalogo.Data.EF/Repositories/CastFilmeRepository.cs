@@ -56,4 +56,9 @@ public class CastFilmeRepository : ICastFilmeRepository
         _context.Set<CastFilme>().Update(objeto);
         return Task.CompletedTask;
     }
+
+    public async Task<List<CastFilme>?> ListPorIds(List<int> castId, CancellationToken cancellationToken)
+    {
+        return await _context.Set<CastFilme>().Where(x => castId.Contains(x.id)).ToListAsync(cancellationToken);
+    }
 }
