@@ -9,6 +9,13 @@ public class VIdeoConfiguration : IEntityTypeConfiguration<Video>
 {
     public void Configure(EntityTypeBuilder<Video> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(video => video.id);
+        builder
+        .Property(video => video.Titulo)
+        .HasMaxLength(255)
+        .IsRequired();
+
+        builder.Property(video => video.Descricao)
+        .HasMaxLength(10000);
     }
 }
