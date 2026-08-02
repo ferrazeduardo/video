@@ -25,9 +25,9 @@ public class VideoRepository : IVideoRepository
         throw new NotImplementedException();
     }
 
-    public Task Insert(Video objeto, CancellationToken cancellationToken)
+    public async Task Insert(Video objeto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await _context.Videos.AddAsync(objeto, cancellationToken);
     }
 
     public Task<SearchOutput<Video>> Search(SearchInput searchInput, CancellationToken cancellationToken)
@@ -40,3 +40,4 @@ public class VideoRepository : IVideoRepository
         throw new NotImplementedException();
     }
 }
+
