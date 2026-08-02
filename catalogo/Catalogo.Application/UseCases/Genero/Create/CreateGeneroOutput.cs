@@ -4,5 +4,5 @@ namespace Catalogo.Application.UseCases.Genero.Create;
 
 public class CreateGeneroOutput
 {
-    public Guid id { get; set; }
+    public int id { get; set; }
 }

@@ -19,7 +19,7 @@ public class DeleteCastFilme : IRequestHandler<DeleteCastFilmeInput, DeleteCastF
 
     public async Task<DeleteCastFilmeOutput> Handle(DeleteCastFilmeInput request, CancellationToken cancellationToken)
     {
-        var cast = await _castFilmeRepository.Get(x => x.idGuid == request.Id, cancellationToken, true);
+        var cast = await _castFilmeRepository.Get(x => x.id == request.Id, cancellationToken, true);
         NotFoundException.IsNull(cast, "CastFilme não encontrado");
         await _castFilmeRepository.Delete(cast, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);

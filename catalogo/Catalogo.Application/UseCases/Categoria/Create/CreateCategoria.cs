@@ -25,7 +25,7 @@ public class CreateCategoria : IRequestHandler<CreateCategoriaInput,CreateCatego
         await _unitOfWork.Commit(cancellationToken);
 
         CreateCategoriaOutput createCategoriaOutput = new();
-        createCategoriaOutput.id = categoria.idGuid;
+        createCategoriaOutput.id = categoria.id;
 
         return createCategoriaOutput;
     }

@@ -42,7 +42,7 @@ public class CreateVideo : IRequestHandler<CreateVideoInput, CreateVideoOutput>
         }
 
 
-        return new CreateVideoOutput(video.idGuid);
+        return new CreateVideoOutput(video.id);
     }
 
     private async Task DeleteThumbHalf(AppDomain.Video video, CancellationToken cancellationToken)

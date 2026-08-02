@@ -4,10 +4,10 @@ namespace Catalogo.Application.UseCases.CastFilme.Create;
 
 public class CreateCastFilmeOutput
 {
-    private Guid idGuid;
+    private int id;
 
-    public CreateCastFilmeOutput(Guid idGuid)
+    public CreateCastFilmeOutput(int id)
     {
-        this.idGuid = idGuid;
+        this.id = id;
     }
 }

@@ -15,11 +15,6 @@ public class Categoria : AggregationRoot
         dataCriacao = DateTime.Now;
         Validacao();
     }
-    public Categoria(Guid id, string nome) : base()
-    {
-        idGuid = id;
-        Nome = nome;
-    }
     public Categoria()
     {
     }

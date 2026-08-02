@@ -11,7 +11,7 @@ public class GetCastFilmeOutput
     {
         cast = new CastFilmeModelOutput
         {
-            id = castFilme.idGuid,
+            id = castFilme.id,
             nome = castFilme.Nome,
             tipo = castFilme.Tipo,
             dataCriacao = castFilme.DataCriacao

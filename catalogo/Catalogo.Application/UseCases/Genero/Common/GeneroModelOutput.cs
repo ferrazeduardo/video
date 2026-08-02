@@ -5,7 +5,7 @@ namespace Catalogo.Application.UseCases.Genero.Common;
 
 public class GeneroModelOutput
 {
-    public Guid id { get; set; }
+    public int id { get; set; }
     public string nome { get; set; }
     public string status { get; set; }
 
@@ -13,7 +13,7 @@ public class GeneroModelOutput
 
     public void FromGenero(Domain.Entity.Genero genero)
     {
-        id = genero.idGuid;
+        id = genero.id;
         nome = genero.Nome;
         status = genero.Status.ToString();
     }

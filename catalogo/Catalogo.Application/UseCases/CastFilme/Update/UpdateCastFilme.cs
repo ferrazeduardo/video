@@ -19,7 +19,7 @@ public class UpdateCastFilme : IRequestHandler<UpdateCastFilmeInput, UpdateCastF
 
     public async Task<UpdateCastFilmeOutput> Handle(UpdateCastFilmeInput request, CancellationToken cancellationToken)
     {
-        var cast = await _castFilmeRepository.Get(x => x.idGuid == request.id, cancellationToken);
+        var cast = await _castFilmeRepository.Get(x => x.id == request.id, cancellationToken);
         NotFoundException.IsNull(cast, "Cast não encontrado");
 
         cast.Update(request.nome, request.tipo);

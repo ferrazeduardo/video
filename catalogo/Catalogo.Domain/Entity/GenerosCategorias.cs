@@ -6,10 +6,10 @@ public class GenerosCategorias
 {
   
 
-    public GenerosCategorias(int generoId, int categoriaId)
+    public GenerosCategorias(int iD_GENERO, int iD_CATEGORIA)
     {
-        this.ID_GENERO = generoId;
-        this.ID_CATEGORIA = categoriaId;
+        this.ID_GENERO = iD_GENERO;
+        this.ID_CATEGORIA = iD_CATEGORIA;
     }
 
     public int ID_CATEGORIA{ get; set; }

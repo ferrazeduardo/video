@@ -15,7 +15,7 @@ public class GetGenero : IRequestHandler<GetGeneroInput, GetGeneroOutput>
     }
     public async Task<GetGeneroOutput> Handle(GetGeneroInput request, CancellationToken cancellationToken)
     {
-        var genero = await _generoRepository.Get(x => x.idGuid == request.id, cancellationToken, false);
+        var genero = await _generoRepository.Get(x => x.id == request.id, cancellationToken, false);
        
        
         NotFoundException.IsNull(genero, "Genero não encontrado");

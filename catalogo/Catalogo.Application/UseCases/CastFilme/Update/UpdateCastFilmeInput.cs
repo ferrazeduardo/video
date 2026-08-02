@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Catalogo.Application.UseCases.CastFilme.Update;
 
-public record UpdateCastFilmeInput(Guid id, string nome, CastFilmeTipo tipo) : IRequest<UpdateCastFilmeOutput>
+public record UpdateCastFilmeInput(int id, string nome, CastFilmeTipo tipo) : IRequest<UpdateCastFilmeOutput>
 {
 
 }

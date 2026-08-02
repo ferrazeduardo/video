@@ -27,8 +27,8 @@ public class AddCategoria : IRequestHandler<AddCategoriaInput, AddCategoriaOutpu
     }
     public async Task<AddCategoriaOutput> Handle(AddCategoriaInput request, CancellationToken cancellationToken)
     {
-        var genero = await _repository.Get(x => x.idGuid == request.Id, cancellationToken);
-        var categoria = await _categoriaRepository.Get(x => x.idGuid == request.Id, cancellationToken);
+        var genero = await _repository.Get(x => x.id == request.Id, cancellationToken);
+        var categoria = await _categoriaRepository.Get(x => x.id == request.Id, cancellationToken);
         NotFoundException.IsNull(genero, "Genero não encontrado");
         NotFoundException.IsNull(categoria, "Categoria não encontrada");
 

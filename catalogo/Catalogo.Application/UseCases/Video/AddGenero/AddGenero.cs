@@ -28,7 +28,7 @@ public class VincularGenero : IRequestHandler<AddGeneroInput, AddGeneroOutput>
     }
     public async Task<AddGeneroOutput> Handle(AddGeneroInput request, CancellationToken cancellationToken)
     {
-        var video = await _videoRespository.Get(x => x.idGuid == request.videoId, cancellationToken);
+        var video = await _videoRespository.Get(x => x.id == request.videoId, cancellationToken);
         var generos = await _generoRepository.ListPorIds(request.generoId, cancellationToken);
 
         NotFoundException.IsNull(video, "Video não existe");

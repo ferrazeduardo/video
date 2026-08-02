@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Catalogo.Application.UseCases.Genero.Get;
 
-public record GetGeneroInput(Guid id): IRequest<GetGeneroOutput>
+public record GetGeneroInput(int id): IRequest<GetGeneroOutput>
 {
 
 }

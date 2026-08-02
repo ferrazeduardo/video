@@ -18,7 +18,7 @@ public class DeleteGenero : IRequestHandler<DeleteGeneroInput, DeleteGeneroOutpu
     }
     public async Task<DeleteGeneroOutput> Handle(DeleteGeneroInput request, CancellationToken cancellationToken)
     {
-        var genero = await _generoRepository.Get(x => x.idGuid == request.id, cancellationToken);
+        var genero = await _generoRepository.Get(x => x.id == request.id, cancellationToken);
         NotFoundException.IsNull(genero,"");
         await _generoRepository.Delete(genero, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);

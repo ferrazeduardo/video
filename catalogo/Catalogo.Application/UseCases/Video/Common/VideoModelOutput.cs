@@ -3,7 +3,7 @@ using System;
 namespace Catalogo.Application.UseCases.Video.Common;
 
 public record VideoModelOutput(
-        Guid id,
+        int id,
         string titulo,
         string descricao,
         int anoLancamento,
@@ -17,5 +17,5 @@ public record VideoModelOutput(
         string thumbHalfArquivoUrl,
         string trailerArquivoUrl);
 
-public record RelatedAgreggation(Guid id, string? Nome);
+public record RelatedAgreggation(int id, string? Nome);
 

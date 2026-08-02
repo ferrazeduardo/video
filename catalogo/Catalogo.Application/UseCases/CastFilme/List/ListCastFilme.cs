@@ -24,7 +24,7 @@ public class ListCastFilme : IRequestHandler<ListCastFilmeInput, ListCastFilmeOu
             searchOutpu.Total,
             searchOutpu.Itens.Select(i => new CastFilmeModelOutput()
             {
-                id = i.idGuid,
+                id = i.id,
                 nome = i.Nome,
                 tipo = i.Tipo,
                 dataCriacao = i.DataCriacao

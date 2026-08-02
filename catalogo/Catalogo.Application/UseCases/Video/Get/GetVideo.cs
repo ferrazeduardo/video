@@ -25,7 +25,7 @@ public class GetVideo : IRequestHandler<GetVideoInput, GetVideoOutput>
     }
     public async Task<GetVideoOutput> Handle(GetVideoInput request, CancellationToken cancellationToken)
     {
-        var video = await _videoRepository.Get(x => x.idGuid == request.id, cancellationToken, false);
+        var video = await _videoRepository.Get(x => x.id == request.id, cancellationToken, false);
         NotFoundException.IsNull(video, "Video não encontrado");
 
         List<Catalogo.Domain.Entity.Categoria>? categorias = null;
@@ -41,14 +41,14 @@ public class GetVideo : IRequestHandler<GetVideoInput, GetVideoOutput>
             cast = await _castFilmeRepository.ListPorIds(video.CastsFilme.ToList(), cancellationToken);
 
         VideoModelOutput videoModelOutput = new VideoModelOutput(
-            video.idGuid,
+            video.id,
             video.Titulo,
             video.Descricao,
             video.AnoLancamento,
             video.Duracao,
-            categorias?.Select(c => new RelatedAgreggation(c.idGuid, c.Nome)).ToList(),
-            generos?.Select(g => new RelatedAgreggation(g.idGuid, g.Nome)).ToList(),
-            cast?.Select(c => new RelatedAgreggation(c.idGuid, c.Nome)).ToList(),
+            categorias?.Select(c => new RelatedAgreggation(c.id, c.Nome)).ToList(),
+            generos?.Select(g => new RelatedAgreggation(g.id, g.Nome)).ToList(),
+            cast?.Select(c => new RelatedAgreggation(c.id, c.Nome)).ToList(),
             video.Thumb?.caminho,
             video.banner?.caminho,
             video.Media?.CaminhoArquivo,

@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Catalogo.Application.UseCases.CastFilme.Get;
 
-public record GetCastFilmeInput(Guid id) : IRequest<GetCastFilmeOutput>
+public record GetCastFilmeInput(int id) : IRequest<GetCastFilmeOutput>
 {
 
 }

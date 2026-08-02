@@ -9,7 +9,7 @@ public class GetGeneroOutput
 
     internal GetGeneroOutput From(Domain.Entity.Genero genero)
     {
-        this.genero.id = genero.idGuid;
+        this.genero.id = genero.id;
         this.genero.nome = genero.Nome;
         return this;
     }

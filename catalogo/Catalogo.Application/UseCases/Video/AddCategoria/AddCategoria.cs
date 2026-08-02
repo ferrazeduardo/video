@@ -29,7 +29,7 @@ public class AddCategoria : IRequestHandler<AddCategoriaInput, AddCategoriaOuput
 
     public async Task<AddCategoriaOuput> Handle(AddCategoriaInput request, CancellationToken cancellationToken)
     {
-        var video = await _videoRespository.Get(x => x.idGuid == request.idVideo, cancellationToken);
+        var video = await _videoRespository.Get(x => x.id == request.idVideo, cancellationToken);
         var categorias = await _categoriaRepository.ListPorIds(request.idCategoria, cancellationToken);
 
         NotFoundException.IsNull(video, "Video não existe");

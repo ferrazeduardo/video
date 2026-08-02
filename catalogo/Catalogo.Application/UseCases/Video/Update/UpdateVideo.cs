@@ -26,7 +26,7 @@ public class UpdateVideo : IRequestHandler<UpdateVideoInput, UpdateVideoOutput>
     }
     public async Task<UpdateVideoOutput> Handle(UpdateVideoInput request, CancellationToken cancellationToken)
     {
-        var video = await _videoRepository.Get(x => x.idGuid == request.id, cancellationToken);
+        var video = await _videoRepository.Get(x => x.id == request.id, cancellationToken);
         NotFoundException.IsNull(video, "Video não encontrado");
 
         video.Update(request.titulo, request.descricao, request.anoLancamento, request.duracao, request.publicado, request.rating);

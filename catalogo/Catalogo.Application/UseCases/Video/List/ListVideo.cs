@@ -64,14 +64,14 @@ public class ListVideo : IRequestHandler<ListVideoInput, ListVideoOutput>
     private Func<Domain.Entity.Video, VideoModelOutput> MapVideoToOutput(List<Catalogo.Domain.Entity.Categoria>? categorias, List<Catalogo.Domain.Entity.Genero> generos, List<Catalogo.Domain.Entity.CastFilme> cast)
     {
         return i => new VideoModelOutput(
-            i.idGuid,
+            i.id,
             i.Titulo,
             i.Descricao,
             i.AnoLancamento,
             i.Duracao,
-            categorias?.Select(c => new RelatedAgreggation(c.idGuid, c.Nome)).ToList() ?? null,
-            generos?.Select(g => new RelatedAgreggation(g.idGuid, g.Nome)).ToList() ?? null,
-            cast?.Select(c => new RelatedAgreggation(c.idGuid, c.Nome)).ToList() ?? null,
+            categorias?.Select(c => new RelatedAgreggation(c.id, c.Nome)).ToList() ?? null,
+            generos?.Select(g => new RelatedAgreggation(g.id, g.Nome)).ToList() ?? null,
+            cast?.Select(c => new RelatedAgreggation(c.id, c.Nome)).ToList() ?? null,
             i.Thumb?.caminho, i.banner?.caminho,
             i.Media?.CaminhoArquivo, 
             i.ThumbHalf?.caminho,

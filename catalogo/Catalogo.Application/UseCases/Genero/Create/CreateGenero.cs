@@ -23,7 +23,7 @@ public class CreateGenero : IRequestHandler<CreateGeneroInput, CreateGeneroOutpu
 
         return new CreateGeneroOutput()
         {
-            id = genero.idGuid
+            id = genero.id
         };
     }
 }

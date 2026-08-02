@@ -22,6 +22,6 @@ public class CreateCastFilme : IRequestHandler<CreateCastFilmeInput, CreateCastF
         await _castFilmeRepository.Insert(cast, cancellationToken);
         await _unitOfWork.Commit( cancellationToken);
 
-        return new CreateCastFilmeOutput(cast.idGuid);
+        return new CreateCastFilmeOutput(cast.id);
     }
 }

@@ -20,7 +20,7 @@ public class DeleteCategoria : IRequestHandler<DeleteCategoriaInput, DeleteCateg
     public async Task<DeleteCategoriaOutput> Handle(DeleteCategoriaInput request, CancellationToken cancellationToken)
     {
         var categoria = new domain.Categoria();
-        categoria.SetIdGuid(request.id);
+        categoria.SetId(request.id);
         await _categoriaRepository.Delete(categoria, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
 

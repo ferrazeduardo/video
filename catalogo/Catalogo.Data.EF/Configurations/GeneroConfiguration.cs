@@ -18,7 +18,7 @@ public class GeneroConfiguration : IEntityTypeConfiguration<Genero>
         builder.Property(g => g.Status)
             .IsRequired();
 
-        builder.Property(g => g.dataCriacao)
+        builder.Property(g => g.DataCriacao)
             .IsRequired();
 
         // builder.HasMany<GenerosCategorias>("categorias")

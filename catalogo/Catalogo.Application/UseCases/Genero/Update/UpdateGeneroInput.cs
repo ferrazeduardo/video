@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Catalogo.Application.UseCases.Genero.Update;
 
-public record UpdateGeneroInput(Guid id,string nome, string status) : IRequest<UpdateGeneroOutput>
+public record UpdateGeneroInput(int id,string nome, string status) : IRequest<UpdateGeneroOutput>
 {
 
 }

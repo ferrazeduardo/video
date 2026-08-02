@@ -3,6 +3,6 @@ using MediatR;
 
 namespace Catalogo.Application.UseCases.Genero.AddCategoria;
 
-public record AddCategoriaInput(Guid Id, string Nome) : IRequest<AddCategoriaOutput>
+public record AddCategoriaInput(int Id, string Nome) : IRequest<AddCategoriaOutput>
 {
 }

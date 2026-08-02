@@ -4,5 +4,5 @@ namespace Catalogo.Application.UseCases.Categoria.Create;
 
 public class CreateCategoriaOutput
 {
-    public Guid id { get; set; }
+    public int id { get; set; }
 }

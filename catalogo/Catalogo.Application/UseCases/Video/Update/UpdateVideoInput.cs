@@ -6,7 +6,7 @@ using MediatR;
 namespace Catalogo.Application.UseCases.Video.Update;
 
 public record UpdateVideoInput(
-    Guid id,
+    int id,
     string titulo,
     string descricao, 
     int anoLancamento,
@@ -16,4 +16,4 @@ public record UpdateVideoInput(
     ArquivoInput banner = null,
     ArquivoInput thumb = null,
     ArquivoInput thumbHalf = null,
-    List<Guid>? generosIds = null) : IRequest<UpdateVideoOutput>;
+    List<int>? generosIds = null) : IRequest<UpdateVideoOutput>;

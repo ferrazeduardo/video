@@ -4,17 +4,11 @@ namespace Catalogo.Domain.SeedWork;
 //padrao seeadwork
 public abstract class Entity
 {
-    protected Entity()
-    {
-        this.idGuid = Guid.NewGuid();
-    }
-
     public int id { get; protected set; }
-    public Guid idGuid { get; protected set; }
 
-    public void SetIdGuid(Guid idGuid)
+    public void SetId(int id)
     {
-        this.idGuid = idGuid;
+        this.id = id;
     }
 
     public override bool Equals(object? obj)
@@ -24,7 +18,7 @@ public abstract class Entity
 
 
         var entity = (Entity)obj;
-        return idGuid == entity.idGuid;
+        return id == entity.id;
     }
 
 }

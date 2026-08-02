@@ -4,6 +4,6 @@ using MediatR;
 
 namespace Catalogo.Application.UseCases.Categoria.Get;
 
-public record GetCategoriaInput(Guid id) : IRequest<GetCategoriaOutput<CategoriaModelOutput>>
+public record GetCategoriaInput(int id) : IRequest<GetCategoriaOutput<CategoriaModelOutput>>
 {
 }

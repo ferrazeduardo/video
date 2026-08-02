@@ -17,7 +17,7 @@ public class GetCastFilme : IRequestHandler<GetCastFilmeInput, GetCastFilmeOutpu
 
     public async Task<GetCastFilmeOutput> Handle(GetCastFilmeInput request, CancellationToken cancellationToken)
     {
-        var cast = await _castFilmeRepository.Get(x => x.idGuid == request.id, cancellationToken, false);
+        var cast = await _castFilmeRepository.Get(x => x.id == request.id, cancellationToken, false);
         NotFoundException.IsNull(cast, "CastFilme não encontrado");
         var output = new GetCastFilmeOutput();
         output.From(cast);
