@@ -11,6 +11,7 @@ public class CatalogoDbContext : DbContext
     public DbSet<GenerosCategorias> GenerosCategorias => Set<GenerosCategorias>();
     public DbSet<CastFilme> CastFilmes => Set<CastFilme>();
     public DbSet<Video> Videos => Set<Video>();
+    public DbSet<VideoCategoria> VideoCategoria => Set<VideoCategoria>();
 
     public CatalogoDbContext(DbContextOptions<CatalogoDbContext> options) : base(options)
     {
@@ -24,5 +25,6 @@ public class CatalogoDbContext : DbContext
         modelBuilder.ApplyConfiguration(new GeneroCategoriaConfiguration());
         modelBuilder.ApplyConfiguration(new CastFilmeConfiguration());
         modelBuilder.ApplyConfiguration(new VIdeoConfiguration());
+        modelBuilder.ApplyConfiguration(new VideoCategoriaConfiguration());
     }
 }
