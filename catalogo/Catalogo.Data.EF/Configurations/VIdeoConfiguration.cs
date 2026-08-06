@@ -17,5 +17,17 @@ public class VIdeoConfiguration : IEntityTypeConfiguration<Video>
 
         builder.Property(video => video.Descricao)
         .HasMaxLength(10000);
+
+        builder.OwnsOne(video => video.Thumb, thumb => 
+            thumb.Property(image => image.caminho).HasColumnName("ThumbCaminho")
+        );
+
+        builder.OwnsOne(video => video.ThumbHalf, thumbHalf => 
+            thumbHalf.Property(image => image.caminho).HasColumnName("ThumbHalfCaminho")
+        );
+
+        builder.OwnsOne(video => video.banner, banner => 
+            banner.Property(imagem => imagem.caminho).HasColumnName("BannerCaminho")
+        );
     }
 }
