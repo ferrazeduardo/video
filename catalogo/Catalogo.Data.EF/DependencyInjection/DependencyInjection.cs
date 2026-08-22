@@ -14,6 +14,7 @@ public static class DependencyInjection
         services.AddScoped<ICategoriaRepository, CategoriaRepository>();
         services.AddScoped<IGeneroRepository, GeneroRepository>();
         services.AddScoped<IGeneroCategoriaRepository, GeneroCategoriaRepository>();
+        services.AddScoped<IVideoCastFilmeRepository, VideoCastFilmeRepository>();
         services.AddDbContext<CatalogoDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("CatalogoDb")));
         return services;

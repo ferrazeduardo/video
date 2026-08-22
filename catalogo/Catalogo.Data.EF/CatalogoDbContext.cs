@@ -12,6 +12,7 @@ public class CatalogoDbContext : DbContext
     public DbSet<CastFilme> CastFilmes => Set<CastFilme>();
     public DbSet<Video> Videos => Set<Video>();
     public DbSet<VideoCategoria> VideoCategoria => Set<VideoCategoria>();
+    public DbSet<VideoCastFilme> VideoCastFilme => Set<VideoCastFilme>();
 
     public CatalogoDbContext(DbContextOptions<CatalogoDbContext> options) : base(options)
     {
@@ -26,5 +27,6 @@ public class CatalogoDbContext : DbContext
         modelBuilder.ApplyConfiguration(new CastFilmeConfiguration());
         modelBuilder.ApplyConfiguration(new VIdeoConfiguration());
         modelBuilder.ApplyConfiguration(new VideoCategoriaConfiguration());
+        modelBuilder.ApplyConfiguration(new VideoCastFilmeConfiguration());
     }
 }
