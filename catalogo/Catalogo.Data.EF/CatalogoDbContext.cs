@@ -8,6 +8,7 @@ public class CatalogoDbContext : DbContext
 {
     public DbSet<Categoria> Categorias => Set<Categoria>();
     public DbSet<Genero> Generos => Set<Genero>();
+    public DbSet<Media> Medias => Set<Media>();
     public DbSet<GenerosCategorias> GenerosCategorias => Set<GenerosCategorias>();
     public DbSet<CastFilme> CastFilmes => Set<CastFilme>();
     public DbSet<Video> Videos => Set<Video>();
