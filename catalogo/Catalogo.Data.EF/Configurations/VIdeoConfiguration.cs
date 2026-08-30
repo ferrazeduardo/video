@@ -29,5 +29,8 @@ public class VIdeoConfiguration : IEntityTypeConfiguration<Video>
         builder.OwnsOne(video => video.banner, banner => 
             banner.Property(imagem => imagem.caminho).HasColumnName("BannerCaminho")
         );
+
+        builder.HasOne(x => x.Media).WithOne().HasForeignKey<Media>();
+        builder.HasOne(x => x.Trailer).WithOne().HasForeignKey<Media>();
     }
 }
