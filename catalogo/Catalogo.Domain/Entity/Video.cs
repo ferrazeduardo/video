@@ -21,7 +21,10 @@ public class Video : AggregationRoot
         Rating = rating;
         Validacao();
     }
+    public Video()
+    {
 
+    }
     public string Titulo { get; private set; }
     public string Descricao { get; private set; }
     public bool Publicado { get; private set; }

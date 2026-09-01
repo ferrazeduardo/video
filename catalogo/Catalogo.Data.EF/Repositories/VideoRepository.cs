@@ -36,9 +36,9 @@ public class VideoRepository : IVideoRepository
         return Task.CompletedTask;
     }
 
-    public Task<Video> Get(Expression<Func<Video, bool>> filtro, CancellationToken cancellationToken, bool rastrer = true)
+    public async Task<Video> Get(Expression<Func<Video, bool>> filtro, CancellationToken cancellationToken, bool rastrer = true)
     {
-        throw new NotImplementedException();
+       return await _context.Set<Video>().Where(filtro).Include(v => v.Trailer).Include(v => v.Media).FirstOrDefaultAsync(cancellationToken) ?? new Video();
     }
 
     public async Task Insert(Video objeto, CancellationToken cancellationToken)
