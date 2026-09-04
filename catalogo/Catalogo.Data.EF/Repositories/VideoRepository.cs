@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Catalogo.Data.EF.Repositories;
 
-public class VideoRepository : IVideoRepository
+public class VideoRepository : IVideoRespository
 {
     private readonly CatalogoDbContext _context;
 
@@ -38,7 +38,7 @@ public class VideoRepository : IVideoRepository
 
     public async Task<Video> Get(Expression<Func<Video, bool>> filtro, CancellationToken cancellationToken, bool rastrer = true)
     {
-       return await _context.Set<Video>().Where(filtro).Include(v => v.Trailer).Include(v => v.Media).FirstOrDefaultAsync(cancellationToken) ?? new Video();
+       return await _context.Set<Video>().Where(filtro).Include(v => v.Trailer).Include(v => v.Media).FirstOrDefaultAsync(cancellationToken);
     }
 
     public async Task Insert(Video objeto, CancellationToken cancellationToken)

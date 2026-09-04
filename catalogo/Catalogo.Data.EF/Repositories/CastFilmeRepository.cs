@@ -43,7 +43,7 @@ public class CastFilmeRepository : ICastFilmeRepository
         var query = _context.Set<CastFilme>().AsNoTracking();
         query = searchInput.Order == SearchOrder.Desc ? query.OrderByDescending(x => x.Nome) : query.OrderBy(x => x.Nome);
 
-        if (string.IsNullOrEmpty(searchInput.Pesquisa))
+        if (!string.IsNullOrEmpty(searchInput.Pesquisa))
             query = query.Where(q => q.Nome.Contains(searchInput.Pesquisa));
 
         var items = await query.Skip(toSkip).Take(searchInput.Quantidade).ToListAsync();

@@ -18,7 +18,7 @@ public class CreateCastFilme : IRequestHandler<CreateCastFilmeInput, CreateCastF
 
     public async Task<CreateCastFilmeOutput> Handle(CreateCastFilmeInput request, CancellationToken cancellationToken)
     {
-        var cast = new AppDomain.CastFilme(request.nome, DateTime.Now, request.tipo);
+        var cast = new AppDomain.CastFilme(request.nome, DateTime.UtcNow, request.tipo);
         await _castFilmeRepository.Insert(cast, cancellationToken);
         await _unitOfWork.Commit( cancellationToken);
 

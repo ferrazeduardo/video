@@ -27,6 +27,8 @@ public class UpdateCategoria : IRequestHandler<UpdateCategoriaInput, UpdateCateg
 
         await _categoriaRepository.Update(categoria, cancellationToken);
 
+        await _unitOfWork.Commit(cancellationToken);
+
         return new UpdateCategoriaOutput();
     }
 }

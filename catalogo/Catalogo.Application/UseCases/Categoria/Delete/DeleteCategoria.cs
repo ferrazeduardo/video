@@ -1,8 +1,8 @@
 using System;
 using Catalogo.Application.Interface;
 using Catalogo.Domain.Interface.Repository;
+using Catalogo.Domain.Exceptions;
 using MediatR;
-using domain = Catalogo.Domain.Entity;
 
 namespace Catalogo.Application.UseCases.Categoria.Delete;
 
@@ -19,8 +19,10 @@ public class DeleteCategoria : IRequestHandler<DeleteCategoriaInput, DeleteCateg
 
     public async Task<DeleteCategoriaOutput> Handle(DeleteCategoriaInput request, CancellationToken cancellationToken)
     {
-        var categoria = new domain.Categoria();
-        categoria.SetId(request.id);
+        var categoria = await _categoriaRepository.Get(x => x.id == request.id, cancellationToken);
+
+        NotFoundException.IsNull(categoria, "Categoria não encontrada");
+
         await _categoriaRepository.Delete(categoria, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
 

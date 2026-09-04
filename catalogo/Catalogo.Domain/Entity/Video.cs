@@ -17,7 +17,7 @@ public class Video : AggregationRoot
         AnoLancamento = anoLancamento;
         Duracao = duracao;
         Publicado = publicado;
-        DataCriacao = DateTime.Now;
+        DataCriacao = DateTime.UtcNow;
         Rating = rating;
         Validacao();
     }

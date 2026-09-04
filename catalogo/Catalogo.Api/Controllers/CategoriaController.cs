@@ -1,6 +1,7 @@
 using Catalogo.Application.UseCases.Categoria.Create;
 using Catalogo.Application.UseCases.Categoria.Delete;
 using Catalogo.Application.UseCases.Categoria.Get;
+using Catalogo.Application.UseCases.Categoria.Update;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -42,10 +43,10 @@ namespace Catalogo.Api.Controllers
 
 
         [HttpPost("update")]
-        public async Task<IActionResult> Update([FromBody] CreateCategoriaInput createCategoriaInput, CancellationToken cancellationToken)
+        public async Task<IActionResult> Update([FromBody] UpdateCategoriaInput updateCategoriaInput, CancellationToken cancellationToken)
         {
-            var response = await _mediator.Send(createCategoriaInput, cancellationToken);
-            return Ok(response);    
+            var response = await _mediator.Send(updateCategoriaInput, cancellationToken);
+            return Ok(response);
         }
     }
 }

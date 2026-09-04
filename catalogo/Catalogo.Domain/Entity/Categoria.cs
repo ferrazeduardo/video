@@ -12,7 +12,7 @@ public class Categoria : AggregationRoot
         Nome = nome;
         Descricao = descricao;
         Ativo();
-        dataCriacao = DateTime.Now;
+        dataCriacao = DateTime.UtcNow;
         Validacao();
     }
     public Categoria()
@@ -49,7 +49,7 @@ public class Categoria : AggregationRoot
 
     public void Update(string nome, string descricao, string status)
     {
-        ExcecaoDeDominio.HaError(status is not null && statusValidos.Contains(status), "Status não é válido");
+        ExcecaoDeDominio.HaError(status is not null && !statusValidos.Contains(status), "Status não é válido");
         Nome = nome ?? Nome;
         Descricao = descricao ?? Descricao;
         Status = status ?? Status;
