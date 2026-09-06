@@ -59,6 +59,6 @@ public class CastFilmeRepository : ICastFilmeRepository
 
     public async Task<List<CastFilme>?> ListPorIds(List<int> castId, CancellationToken cancellationToken)
     {
-        return await _context.Set<CastFilme>().Where(x => castId.Contains(x.id)).ToListAsync(cancellationToken);
+        return await _context.Set<CastFilme>().AsNoTracking().Where(x => castId.Contains(x.id)).ToListAsync(cancellationToken);
     }
 }
