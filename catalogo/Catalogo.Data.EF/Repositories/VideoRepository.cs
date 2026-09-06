@@ -46,9 +46,17 @@ public class VideoRepository : IVideoRespository
         await _context.Videos.AddAsync(objeto, cancellationToken);
     }
 
-    public Task<SearchOutput<Video>> Search(SearchInput searchInput, CancellationToken cancellationToken)
+    public async Task<SearchOutput<Video>> Search(SearchInput searchInput, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var query = _context.Set<Video>().AsNoTracking();
+        query = searchInput.Order == SearchOrder.Desc ? query.OrderByDescending(v => v.Titulo) : query.OrderBy(v => v.Titulo);
+
+        if(!String.IsNullOrEmpty(searchInput.Pesquisa))
+            query = query.Where(v => v.Titulo.Contains(searchInput.Pesquisa));
+        
+        var total = await query.CountAsync(cancellationToken);
+        var itens = await query.Skip((searchInput.Pagina - 1) * searchInput.Quantidade).Take(searchInput.Quantidade).ToListAsync(cancellationToken);
+        return new (searchInput.Pagina, searchInput.Quantidade, total, itens);
     }
 
     public Task Update(Video objeto, CancellationToken cancellationToken)
