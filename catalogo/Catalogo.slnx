@@ -3,4 +3,5 @@
   <Project Path="Catalogo.Application/Catalogo.Application.csproj" />
   <Project Path="Catalogo.Data.EF/Catalogo.Data.EF.csproj" />
   <Project Path="Catalogo.Domain/Catalogo.Domain.csproj" />
+  <Project Path="Catalogo.Storage/Catalogo.Storage.csproj" />
 </Solution>
