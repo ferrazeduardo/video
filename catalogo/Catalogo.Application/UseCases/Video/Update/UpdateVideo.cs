@@ -43,7 +43,7 @@ public class UpdateVideo : IRequestHandler<UpdateVideoInput, UpdateVideoOutput>
         if (request.banner is null) return;
 
         var arquivoNome = StorageName.Create(video.id, nameof(video.banner), request.banner.extension);
-        var bannerUrl = await _storageService.Upload(arquivoNome, request.banner.arquivoStream, cancellationToken);
+        var bannerUrl = await _storageService.Upload(arquivoNome, request.banner.arquivoStream,request.banner.contentType, cancellationToken);
         video.UpdateBanner(bannerUrl);
     }
     private async Task UploadImageThumb(UpdateVideoInput request, AppDomain.Video video, CancellationToken cancellationToken)
@@ -51,7 +51,7 @@ public class UpdateVideo : IRequestHandler<UpdateVideoInput, UpdateVideoOutput>
         if (request.thumb is null) return;
 
         var arquivoNome = StorageName.Create(video.id, nameof(video.Thumb), request.thumb.extension);
-        var thumbUrl = await _storageService.Upload(arquivoNome, request.thumb.arquivoStream, cancellationToken);
+        var thumbUrl = await _storageService.Upload(arquivoNome, request.thumb.arquivoStream,request.thumb.contentType, cancellationToken);
         video.UpdateThumb(thumbUrl);
     }
     private async Task UploadImageThumbHalf(UpdateVideoInput request, AppDomain.Video video, CancellationToken cancellationToken)
@@ -59,7 +59,7 @@ public class UpdateVideo : IRequestHandler<UpdateVideoInput, UpdateVideoOutput>
         if (request.thumbHalf is null) return;
 
         var arquivoNome = StorageName.Create(video.id, nameof(video.ThumbHalf), request.thumbHalf.extension);
-        var thumbHalfUrl = await _storageService.Upload(arquivoNome, request.thumbHalf.arquivoStream, cancellationToken);
+        var thumbHalfUrl = await _storageService.Upload(arquivoNome, request.thumbHalf.arquivoStream,request.thumbHalf.contentType, cancellationToken);
         video.UpdateThumbHald(thumbHalfUrl);
     }
 }
