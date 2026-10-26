@@ -64,7 +64,7 @@ public class CreateVideo : IRequestHandler<CreateVideoInput, CreateVideoOutput>
     {
         if (request.thumbHalf is not null)
         {
-            var url = await _storageService.Upload($"{video.id}-thumbHanlf.{request.thumbHalf.extension}", request.thumbHalf.arquivoStream, cancellationToken);
+            var url = await _storageService.Upload($"{video.id}-thumbHanlf.{request.thumbHalf.extension}", request.thumbHalf.arquivoStream,request.thumbHalf.contentType, cancellationToken);
             video.UpdateThumbHald(url);
         }
     }
@@ -73,7 +73,7 @@ public class CreateVideo : IRequestHandler<CreateVideoInput, CreateVideoOutput>
     {
         if (request.banner is not null)
         {
-            var url = await _storageService.Upload($"{video.id}-banner.{request.banner.extension}", request.banner.arquivoStream, cancellationToken);
+            var url = await _storageService.Upload($"{video.id}-banner.{request.banner.extension}", request.banner.arquivoStream,request.banner.contentType, cancellationToken);
             video.UpdateBanner(url);
         }
     }
@@ -82,7 +82,7 @@ public class CreateVideo : IRequestHandler<CreateVideoInput, CreateVideoOutput>
     {
         if (request.thumb is not null)
         {
-            var thumbUrl = await _storageService.Upload($"{video.id}-thumb.{request.thumb.extension}", request.thumb.arquivoStream, cancellationToken);
+            var thumbUrl = await _storageService.Upload($"{video.id}-thumb.{request.thumb.extension}", request.thumb.arquivoStream,request.thumb.contentType, cancellationToken);
             video.UpdateThumb(thumbUrl);
         }
     }
