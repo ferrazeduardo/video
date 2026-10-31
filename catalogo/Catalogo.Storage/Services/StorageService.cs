@@ -17,13 +17,14 @@ public class StorageService : IStorageService
         _options = options;
     }
 
-    public Task Delete(string arquivoNome, CancellationToken cancellationToken)
+    public async Task Delete(string arquivoNome, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await _storageClient.DeleteObjectAsync(_options.Value.BucketName, arquivoNome, cancellationToken: cancellationToken);
     }
 
-    public Task<string> Upload(string arquivoNome, Stream arquivoStream, string contentType, CancellationToken cancellationToken)
+    public async Task<string> Upload(string arquivoNome, Stream arquivoStream, string contentType, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await _storageClient.UploadObjectAsync( bucket: _options.Value.BucketName, objectName:  arquivoNome, contentType: contentType ,source: arquivoStream,cancellationToken: cancellationToken);
+        return arquivoNome;
     }
 }
