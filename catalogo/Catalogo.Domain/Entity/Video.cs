@@ -1,5 +1,6 @@
 using System;
 using Catalogo.Domain.Enum;
+using Catalogo.Domain.Events;
 using Catalogo.Domain.Exceptions;
 using Catalogo.Domain.SeedWork;
 using Catalogo.Domain.Validation;
@@ -53,6 +54,12 @@ public class Video : AggregationRoot
     public void UpdateMedia(string caminhoArquivo)
     {
         Media = new Media(caminhoArquivo);
+        RaiseEvent(new VideoUploadedEvent(id, caminhoArquivo));
+    }
+
+    private void RaiseEvent(VideoUploadedEvent videoUploadedEvent)
+    {
+        throw new NotImplementedException();
     }
 
     public void UpdateTrailer(string caminhoArquivo)

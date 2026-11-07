@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Entity/" />
     <Folder Include="Enum/" />
+    <Folder Include="Events/" />
     <Folder Include="Exceptions/" />
     <Folder Include="Extensions/" />
     <Folder Include="Validation/" />
