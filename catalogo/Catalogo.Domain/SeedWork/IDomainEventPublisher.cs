@@ -4,5 +4,5 @@ namespace Catalogo.Domain.SeedWork;
 
 public interface IDomainEventPublisher
 {
-    Task PublishAsync(DomainEvent evento)  ;
+    Task PublishAsync<TDomainEvent>(TDomainEvent evento,CancellationToken cancellationToken) where TDomainEvent : DomainEvent;
 }
