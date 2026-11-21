@@ -17,6 +17,7 @@
   <ItemGroup>
     <Folder Include="Common/" />
     <Folder Include="DependencyInjection/" />
+    <Folder Include="EventHandlers/" />
     <Folder Include="Interfaces/" />
     <Folder Include="UseCases/CastFilme/" />
     <Folder Include="UseCases/CastFilme/Common/" />
