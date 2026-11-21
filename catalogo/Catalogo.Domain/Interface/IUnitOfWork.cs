@@ -5,4 +5,6 @@ namespace Catalogo.Application.Interface;
 public interface IUnitOfWork
 {
     Task Commit(CancellationToken cancellationToken);
+    Task PublishDomainEvents(CancellationToken cancellationToken);
+
 }

@@ -34,6 +34,7 @@ public class UploadMedias : IRequestHandler<UploadMediasInput>
 
             await _videoRepository.Update(video, cancellationToken);
             await _unitOfWork.Commit(cancellationToken);
+            await _unitOfWork.PublishDomainEvents(cancellationToken);
 
         }
         catch (Exception ex)
@@ -65,7 +66,7 @@ public class UploadMedias : IRequestHandler<UploadMediasInput>
         if (request.trailerInput is not null)
         {
             var fileName = StorageName.Create(video.id, nameof(video.Trailer), request.trailerInput.extension);
-            var uploadedArquivo = await _storageService.Upload(fileName, request.trailerInput.arquivoStream, cancellationToken);
+            var uploadedArquivo = await _storageService.Upload(fileName, request.trailerInput.arquivoStream, request.trailerInput.extension, cancellationToken);
             video.UpdateTrailer(uploadedArquivo);
         }
     }
@@ -75,7 +76,7 @@ public class UploadMedias : IRequestHandler<UploadMediasInput>
         if (request.arquivoVideo is not null)
         {
             var fileName = StorageName.Create(video.id, nameof(video.Media), request.arquivoVideo.extension);
-            var uploadedArquivo = await _storageService.Upload(fileName, request.arquivoVideo.arquivoStream, cancellationToken);
+            var uploadedArquivo = await _storageService.Upload(fileName, request.arquivoVideo.arquivoStream, request.arquivoVideo.extension, cancellationToken);
             video.UpdateMedia(uploadedArquivo);
         }
     }
