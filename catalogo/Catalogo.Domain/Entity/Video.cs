@@ -59,7 +59,7 @@ public class Video : AggregationRoot
 
     private void RaiseEvent(VideoUploadedEvent videoUploadedEvent)
     {
-        throw new NotImplementedException();
+        AddEvent(videoUploadedEvent);
     }
 
     public void UpdateTrailer(string caminhoArquivo)
